@@ -1,0 +1,1372 @@
+# ENTERPRISE-GRADE MASTER PROMPT
+# COMPLETE E-COMMERCE SECURITY HARDENING, DATABASE OPTIMIZATION, BUSINESS LOGIC VALIDATION, MILLION-PRODUCT SCALABILITY & PREMIUM INFINITE SCROLLING
+
+## ROLE & RESPONSIBILITY
+
+You are acting as a Principal Software Architect, Senior Application Security Engineer, Database Architect, Backend Performance Engineer, Full-Stack Engineer, DevSecOps Engineer, and Enterprise QA Automation Specialist.
+
+Your responsibility is to conduct a comprehensive source-code audit, security assessment, database optimization, business logic validation, and performance engineering upgrade of this existing e-commerce application.
+
+This is an existing application with established architecture, working features, business logic, components, APIs, routes, URLs, and designs.
+
+**Do NOT rebuild the application. Do NOT redesign the existing website. Do NOT perform unnecessary refactoring.**
+
+Your goal is to identify genuine security vulnerabilities, data-integrity problems, scalability limitations, inefficient database operations, and performance bottlenecks, then safely repair only the verified problems.
+
+The final application must be capable of securely managing a very large e-commerce catalog, including hundreds of thousands or millions of products, without loading the entire catalog into application memory or crashing the frontend/backend.
+
+All implementation must follow real-world production engineering practices.
+
+---
+
+# PHASE 1: COMPLETE SOURCE CODE AUDIT
+
+Before modifying any code, inspect and understand the entire existing project.
+
+Read and analyze the relevant source files across the complete repository.
+
+Do not inspect only the frontend or only the backend.
+
+Understand the complete application architecture, including:
+
+### Frontend
+- Application entry points.
+- Routing.
+- Pages.
+- Reusable components.
+- State management.
+- API integration.
+- Data-fetching logic.
+- Product listing.
+- Product details.
+- Search.
+- Filtering.
+- Sorting.
+- Pagination.
+- Infinite scrolling.
+- Cart.
+- Wishlist.
+- Checkout.
+- User authentication.
+- Admin Panel.
+
+### Backend
+- Server initialization.
+- API routes.
+- Controllers.
+- Services.
+- Business logic.
+- Authentication.
+- Authorization.
+- Validation.
+- Middleware.
+- Error handling.
+- Rate limiting.
+- File uploads.
+- Payment processing.
+- Order processing.
+- Inventory management.
+- Background jobs.
+
+### Database
+- Database connection.
+- Models.
+- Schemas.
+- Relationships.
+- Indexes.
+- Aggregation pipelines.
+- Query patterns.
+- Data validation.
+- Transactions.
+- Database migrations.
+- Data retention.
+
+### Infrastructure
+- Environment variables.
+- Deployment configuration.
+- Storage providers.
+- Caching.
+- Logging.
+- Monitoring.
+- Build configuration.
+- Production startup scripts.
+
+Identify:
+
+1. Existing architecture.
+2. Current security mechanisms.
+3. Current database access patterns.
+4. Existing product loading mechanism.
+5. Existing pagination implementation.
+6. Existing caching strategy.
+7. Existing schema validation.
+8. Existing business logic.
+9. Existing bottlenecks.
+10. Existing vulnerabilities.
+
+Create an internal dependency map showing which components, APIs, services, and database models depend on each other.
+
+**Do not make code changes until you understand the affected architecture and the impact of each proposed change.**
+
+---
+
+# PHASE 2: ENTERPRISE-GRADE APPLICATION SECURITY
+
+Conduct a comprehensive security audit and implement appropriate production-grade security controls.
+
+Follow the OWASP Top 10 and applicable OWASP Application Security Verification Standard principles.
+
+Do not simply install security packages and assume the application is secure.
+
+Inspect the actual implementation and enforce security at the correct architectural layers.
+
+## 2.1 Authentication Security
+
+Inspect and strengthen:
+
+- User registration.
+- User login.
+- Password handling.
+- Password hashing.
+- Session management.
+- Token generation.
+- Token verification.
+- Token expiration.
+- Refresh token rotation, if applicable.
+- Logout.
+- Password reset.
+- Email verification.
+- Account recovery.
+- Session invalidation.
+
+Requirements:
+
+- Use an established, secure password hashing algorithm such as Argon2id or an appropriately configured bcrypt implementation.
+- Never store plaintext passwords.
+- Never return password hashes in API responses.
+- Use secure token generation.
+- Set appropriate token expiration.
+- Implement safe refresh token handling.
+- Prevent token reuse where applicable.
+- Secure cookie settings when cookies are used.
+- Configure Secure, HttpOnly, and appropriate SameSite attributes for authentication cookies.
+- Prevent authentication bypass.
+- Avoid exposing authentication secrets in frontend code.
+
+Preserve the existing authentication architecture where it is already secure and functional.
+
+## 2.2 Authorization and Access Control
+
+Implement or strengthen server-side authorization.
+
+Verify permissions for:
+
+- Customers.
+- Admins.
+- Staff.
+- Super Admins.
+- Other existing roles.
+
+Requirements:
+
+- Role-Based Access Control (RBAC), if applicable.
+- Least-privilege access.
+- Backend authorization on protected APIs.
+- Resource ownership validation.
+- Object-level authorization.
+- Protection against IDOR vulnerabilities.
+- Protection against privilege escalation.
+- Restricted administrative operations.
+
+Never rely only on hiding buttons or pages in the frontend.
+
+A user must never gain access to another user's private information simply by changing an ID in an API request.
+
+Do not weaken existing authorization rules to make features work.
+
+## 2.3 API Security
+
+Inspect every sensitive API endpoint.
+
+Implement or improve:
+
+- Request validation.
+- Authentication middleware.
+- Authorization middleware.
+- Rate limiting.
+- Request size limits.
+- Safe error responses.
+- Input sanitization where appropriate.
+- Secure CORS configuration.
+- HTTP security headers.
+- Protection against injection attacks.
+- Protection against mass assignment.
+- Protection against unsafe query operators.
+- Protection against malformed requests.
+
+Do not expose:
+
+- Database credentials.
+- Secret API keys.
+- Authentication tokens.
+- Internal stack traces.
+- Sensitive database fields.
+- Private customer information.
+
+Never return a success response if the underlying operation failed.
+
+## 2.4 Input Validation and Injection Protection
+
+Validate every untrusted input.
+
+Pay particular attention to:
+
+- Product search.
+- Filters.
+- Sorting.
+- Pagination parameters.
+- Product IDs.
+- Category IDs.
+- Prices.
+- Inventory quantities.
+- Coupon codes.
+- Order IDs.
+- User IDs.
+- File uploads.
+- Admin form submissions.
+
+For MongoDB/Mongoose applications:
+
+- Never directly accept arbitrary MongoDB query objects from clients.
+- Prevent NoSQL injection.
+- Restrict filter fields to an explicit allowlist.
+- Restrict sortable fields to an explicit allowlist.
+- Validate ObjectIds.
+- Avoid unsafe dynamic query construction.
+- Use strict schema definitions.
+- Prevent mass assignment.
+- Avoid exposing internal database operators.
+
+If the application uses another database, apply the equivalent database-specific protections.
+
+## 2.5 XSS, CSRF and Browser Security
+
+Inspect all user-generated content.
+
+Protect:
+
+- Product descriptions.
+- Reviews.
+- Comments.
+- CMS content.
+- User profiles.
+- Search input.
+- Admin-generated content.
+
+Apply safe output encoding and sanitization appropriate to the rendering context.
+
+Implement CSRF protection where the application's authentication and cookie architecture requires it.
+
+Configure an appropriate Content Security Policy and other security headers without breaking legitimate third-party integrations.
+
+Do not use unsafe HTML rendering for untrusted content.
+
+## 2.6 File Upload Security
+
+Inspect the existing file upload infrastructure.
+
+Validate:
+
+- MIME type.
+- Actual file content where feasible.
+- File size.
+- Allowed formats.
+- File naming.
+- Storage permissions.
+
+Reject malicious files and executable uploads.
+
+Prevent path traversal and unsafe file handling.
+
+Never expose private storage credentials.
+
+Reuse the existing configured storage architecture.
+
+---
+
+# PHASE 3: DATABASE SCHEMA VALIDATION AND DATA INTEGRITY
+
+Inspect every important database model and schema.
+
+Pay particular attention to:
+
+- Products.
+- Product variants.
+- Categories.
+- Users.
+- Orders.
+- Order items.
+- Payments.
+- Inventory.
+- Coupons.
+- Reviews.
+- Banners.
+- Hero sliders.
+- Advertisements.
+- Other existing application records.
+
+## 3.1 Schema Validation
+
+Ensure that every important model has appropriate:
+
+- Required fields.
+- Data types.
+- Minimum values.
+- Maximum values.
+- String length limits.
+- Enumerated values.
+- Uniqueness constraints.
+- Relationship validation.
+- Default values.
+- Timestamp handling.
+- Index definitions.
+
+Validate important business data on the backend.
+
+Do not trust frontend validation alone.
+
+Examples:
+
+Product:
+- Valid name.
+- Valid SKU.
+- Valid price.
+- Valid discount.
+- Valid stock quantity.
+- Valid category reference.
+- Valid product status.
+
+Order:
+- Valid customer.
+- Valid order items.
+- Valid quantities.
+- Valid calculated totals.
+- Valid shipping information.
+- Valid order status.
+
+Payment:
+- Valid payment reference.
+- Valid transaction association.
+- Valid amount.
+- Valid currency.
+- Valid verified status.
+
+Coupon:
+- Valid discount.
+- Valid expiry date.
+- Valid usage limits.
+- Valid eligibility.
+
+## 3.2 Business Logic Validation
+
+Inspect and validate all critical business rules.
+
+Examples:
+
+### Product Pricing
+
+- Discount must not exceed the permitted limit.
+- Final price must never become negative.
+- Frontend-submitted prices must not be trusted.
+- Backend must calculate the authoritative price.
+
+### Inventory
+
+- Stock must not become negative through invalid operations.
+- Concurrent purchases must not oversell inventory.
+- Stock reduction must be atomic where supported.
+- Order cancellation and refunds must follow the correct stock-restoration rules.
+
+### Orders
+
+- Validate product availability.
+- Validate quantities.
+- Recalculate order totals.
+- Validate shipping costs.
+- Validate coupon eligibility.
+- Prevent duplicate order submission.
+- Preserve order history.
+
+### Payments
+
+- Verify online payments server-side.
+- Never trust frontend payment success.
+- Prevent duplicate payment processing.
+- Preserve transaction history.
+- Never mark COD as collected before actual collection.
+
+### Coupons
+
+- Prevent expired coupons.
+- Prevent usage-limit bypass.
+- Prevent unauthorized repeated usage.
+- Recalculate discounts on the backend.
+
+Never change established business rules unless a verified defect requires correction.
+
+## 3.3 Safe Database Changes
+
+Before modifying a schema:
+
+1. Inspect existing records.
+2. Inspect model dependencies.
+3. Identify backward-compatibility requirements.
+4. Prepare a safe migration strategy.
+5. Preserve existing data.
+6. Add indexes safely.
+7. Verify migration results.
+
+Never drop production collections.
+
+Never reset the database.
+
+Never delete customer, order, payment, or historical records to simplify implementation.
+
+For multi-record operations requiring consistency, use database transactions where supported.
+
+If MongoDB is used, verify the actual deployment topology before relying on multi-document transactions. A standalone MongoDB deployment does not provide the same transaction capabilities as a replica set.
+
+Use conditional atomic updates or another safe consistency strategy where appropriate.
+
+---
+
+# PHASE 4: MEMORY MANAGEMENT AND RESOURCE SAFETY
+
+The application must remain stable when the product catalog and customer activity grow significantly.
+
+Inspect both backend and frontend memory usage.
+
+## Backend Requirements
+
+Never load the entire product catalog into application memory for normal listing requests.
+
+Avoid:
+
+- Unbounded find() queries.
+- Loading every record into arrays.
+- Large in-memory aggregations.
+- Unbounded background job queues.
+- Unnecessary full-document retrieval.
+- Repeated large object creation.
+- Memory-heavy transformations.
+- Uncontrolled concurrent database requests.
+
+Use:
+
+- Bounded queries.
+- Database-side filtering.
+- Database-side sorting.
+- Field projections.
+- Streaming or cursor-based processing for large exports where appropriate.
+- Controlled concurrency.
+- Efficient batch processing.
+- Proper resource cleanup.
+
+Avoid returning unnecessary fields from database queries.
+
+Use database projections to retrieve only the fields needed by the current endpoint.
+
+## Frontend Requirements
+
+Do not keep millions of product objects in browser memory.
+
+Keep only the product pages/items needed for the active browsing session.
+
+Avoid:
+
+- Loading all products on initial page load.
+- Duplicate product arrays.
+- Unnecessary state copies.
+- Uncontrolled event listeners.
+- Uncancelled requests.
+- Memory leaks.
+- Repeated component mounting.
+- Excessively large DOM trees.
+
+Clean up observers, listeners, and pending requests appropriately.
+
+Use list virtualization if the actual rendered list becomes large enough to require it.
+
+**Infinite scrolling must not become an excuse to accumulate an unlimited number of products in browser memory.**
+
+For extremely long browsing sessions, use an appropriate bounded client-side cache or virtualization strategy without breaking the user's expected scrolling experience.
+
+---
+
+# PHASE 5: MILLION-PRODUCT DATABASE SCALABILITY
+
+The application must be designed to handle a catalog containing hundreds of thousands or millions of products.
+
+The system must not load all products at once.
+
+The backend must return only a bounded number of products per request.
+
+The frontend must progressively load additional products as needed.
+
+## 5.1 Database Query Optimization
+
+Inspect all product-related queries.
+
+Optimize:
+
+- Product listing.
+- Product search.
+- Category filtering.
+- Brand filtering.
+- Price filtering.
+- Sorting.
+- Product status.
+- Featured products.
+- Related products.
+- Product variants.
+- Inventory lookup.
+
+Avoid fetching full database documents when the frontend needs only a small subset of fields.
+
+Use field projection.
+
+Use database-side filtering and sorting.
+
+Avoid unnecessary population of large related collections.
+
+Inspect and optimize N+1 query patterns.
+
+## 5.2 Database Indexing
+
+Analyze actual query patterns before creating indexes.
+
+Create appropriate indexes for frequently used query conditions.
+
+Potential product index fields may include:
+
+- status.
+- categoryId.
+- brandId.
+- price.
+- createdAt.
+- featured.
+- SKU.
+- slug.
+
+For common compound queries, evaluate compound indexes based on actual filter and sort patterns.
+
+For example, a listing query may need an index that supports an active status filter and a common sort order.
+
+Do not blindly create every possible index.
+
+Too many indexes increase write cost and storage usage.
+
+Use database explain/query-plan tools where available to verify that critical queries use efficient execution plans.
+
+Do not assume an index is useful merely because it exists.
+
+## 5.3 Pagination Strategy
+
+Use scalable server-side pagination.
+
+Prefer cursor-based pagination for large product datasets when appropriate.
+
+Avoid deep offset/skip pagination for high-volume collections if it produces expensive database scans.
+
+Recommended approach:
+
+- Stable sort order.
+- Unique tie-breaker.
+- Cursor based on the selected sort field and a unique identifier.
+- Bounded page size.
+- Explicit next cursor.
+- Explicit hasMore indicator.
+
+For example, if products are sorted by createdAt descending, use createdAt together with a unique identifier as the stable pagination boundary.
+
+Prevent duplicate or missing products across page boundaries.
+
+Ensure the cursor is validated and cannot be used to inject arbitrary query conditions.
+
+Offset pagination may remain for small administrative tables where it is appropriate.
+
+---
+
+# PHASE 6: PREMIUM INFINITE SCROLL PRODUCT LOADING
+
+This is a mandatory feature requirement.
+
+Implement or improve the existing product listing experience so that products are progressively loaded in batches of exactly 20 items per successful page request, except when fewer than 20 remain.
+
+The first request must return a maximum of 20 products.
+
+The next request must return the next batch of 20 products.
+
+Continue loading as the customer scrolls.
+
+Do not request or return the entire product collection.
+
+## 6.1 Expected User Experience
+
+Initial page load:
+
+- Load the first 20 products.
+- Display the products as soon as their data is ready.
+- Avoid blocking the entire page unnecessarily.
+
+When the customer scrolls near the end of the currently loaded product list:
+
+- Detect the loading threshold.
+- Request the next 20 products.
+- Show a premium skeleton loading state.
+- Append the newly returned products.
+- Preserve the existing products.
+- Continue only when more products are available.
+
+Repeat this process until no more products remain.
+
+## 6.2 Intersection Observer
+
+Prefer IntersectionObserver or the project's existing equivalent to detect when the user approaches the end of the product list.
+
+Use a reasonable rootMargin to begin fetching before the customer reaches the absolute bottom.
+
+Do not use continuous scroll event handlers that trigger excessive state updates or API requests.
+
+Clean up observers when the component unmounts or the query changes.
+
+## 6.3 Premium Skeleton Loading UI
+
+Create a professional skeleton loading experience consistent with the existing product card design.
+
+While the next batch is loading, show approximately 4-8 lightweight skeleton product cards, depending on the current grid layout.
+
+Each skeleton should reflect the actual product card structure:
+
+- Image placeholder.
+- Product title placeholder.
+- Price placeholder.
+- Optional discount placeholder.
+- Rating placeholder.
+- Button placeholder if needed.
+
+Use a subtle shimmer or pulse animation.
+
+The skeleton must:
+
+- Have dimensions close to the real product cards.
+- Prevent unnecessary layout shifts.
+- Match the existing theme.
+- Work on desktop, tablet, and mobile.
+- Respect reduced-motion preferences.
+- Avoid heavy animation effects.
+
+Do not show fake product information during loading.
+
+## 6.4 Loading Performance
+
+Aim for a responsive experience.
+
+Target the next 20-product request to complete within approximately 1-2 seconds under the defined normal test environment and network conditions.
+
+This is a performance target, not a guaranteed artificial delay.
+
+Do not insert a fixed one- or two-second timeout merely to make the animation visible.
+
+If the backend responds quickly, display the real products quickly.
+
+If the request takes longer, keep the skeleton visible until the actual response arrives.
+
+Use real performance measurements.
+
+## 6.5 Infinite Scroll API Contract
+
+Adapt the existing API architecture where possible.
+
+A scalable response should conceptually contain:
+
+- products: current batch of products.
+- nextCursor: next pagination cursor.
+- hasMore: whether more products are available.
+- limit: actual page size.
+
+The exact property names must follow existing project conventions unless a change is technically necessary.
+
+The backend must enforce a maximum page size of 20 for this specific public product browsing flow.
+
+Never trust a client-provided limit without applying a server-side maximum.
+
+## 6.6 Prevent Duplicate Requests
+
+Implement protections against:
+
+- Multiple observer triggers.
+- Repeated API calls.
+- Duplicate products.
+- Out-of-order responses.
+- Race conditions.
+- Infinite request loops.
+- Repeated loading after hasMore becomes false.
+
+Use a proper loading lock or the existing query library's request-state mechanism.
+
+Append only valid, unique products.
+
+## 6.7 Filter and Search Changes
+
+When the user changes:
+
+- Search query.
+- Category.
+- Brand.
+- Price range.
+- Sort order.
+- Product status filter.
+- Other listing filters.
+
+The product listing must:
+
+1. Reset the previous pagination cursor.
+2. Reset the relevant loaded product state.
+3. Cancel or ignore stale requests.
+4. Request the first 20 matching products.
+5. Start a new infinite-scroll sequence.
+
+Do not append products from an old search result to a new filter result.
+
+Keep the current filter and sorting behavior intact.
+
+## 6.8 End of Results
+
+When there are no more products:
+
+- Stop further requests.
+- Disconnect or disable the load trigger appropriately.
+- Display a subtle end-of-results message if suitable.
+- Do not display endless skeleton loaders.
+
+If the current category or search has no matching products, display the existing empty state or a professionally designed empty state consistent with the current UI.
+
+## 6.9 Product Grid Responsiveness
+
+Preserve the existing product card design.
+
+Do not redesign the product cards unnecessarily.
+
+Ensure the grid works correctly across:
+
+- Desktop.
+- Laptop.
+- Tablet.
+- Mobile.
+
+Maintain consistent spacing, image ratios, card heights, and loading placeholders.
+
+---
+
+# PHASE 7: SEARCH AND FILTER SCALABILITY
+
+Product search and filtering must remain efficient with a very large catalog.
+
+Inspect the existing search implementation.
+
+Do not retrieve the entire catalog and filter it in the browser.
+
+Perform search and filtering on the backend/database.
+
+Requirements:
+
+- Debounced search input where appropriate.
+- Server-side filtering.
+- Server-side sorting.
+- Validated search fields.
+- Validated filter values.
+- Bounded result sets.
+- Efficient indexes.
+- Stable pagination cursors.
+- Request cancellation or stale-response protection.
+
+Do not allow arbitrary client-defined database fields or operators.
+
+For large datasets, evaluate whether the current search engine is sufficient.
+
+Use the existing search infrastructure where appropriate.
+
+Only introduce a dedicated search service such as Elasticsearch, OpenSearch, or another search engine if there is a demonstrated need and the project can support the additional operational complexity.
+
+Do not introduce an unnecessary infrastructure dependency.
+
+---
+
+# PHASE 8: CACHING AND PERFORMANCE ENGINEERING
+
+Inspect the existing caching architecture.
+
+Optimize frequently accessed public catalog data where appropriate.
+
+Potential cache candidates:
+
+- Product category lists.
+- Public navigation.
+- Public homepage sections.
+- Frequently accessed product listing queries.
+- Other stable public catalog data.
+
+Requirements:
+
+- Correct cache keys.
+- Filter-aware cache keys.
+- Pagination-aware cache keys.
+- Appropriate TTL.
+- Cache invalidation after relevant updates.
+- No leakage of private user-specific data.
+- Safe behavior when cache is unavailable.
+
+Never serve stale prices, inventory, or payment-critical data in ways that could cause incorrect purchases.
+
+Revalidate important purchase data on the backend during checkout.
+
+Use cache-aside or another suitable pattern consistent with the existing infrastructure.
+
+Do not add Redis or another caching service unless it is justified by the current architecture and deployment capabilities.
+
+---
+
+# PHASE 9: BACKEND CONCURRENCY AND HIGH-LOAD SAFETY
+
+Inspect how the application handles concurrent requests.
+
+Prevent:
+
+- Overselling inventory.
+- Duplicate order creation.
+- Duplicate payment processing.
+- Lost updates.
+- Race conditions.
+- Excessive database connections.
+- Unbounded background work.
+- Resource exhaustion.
+
+Use appropriate:
+
+- Atomic database updates.
+- Conditional writes.
+- Unique constraints.
+- Idempotency keys.
+- Database transactions where supported.
+- Bounded concurrency.
+- Connection pooling.
+- Request timeouts.
+- Safe retry strategies.
+
+Never retry financial operations blindly.
+
+For uncertain payment outcomes, verify with the gateway before retrying.
+
+Do not introduce unsafe distributed locks or unnecessary infrastructure.
+
+---
+
+# PHASE 10: DATA PRIVACY, ENCRYPTION AND SECRET MANAGEMENT
+
+Protect sensitive application data.
+
+Inspect:
+
+- Passwords.
+- Authentication tokens.
+- Customer personal information.
+- Addresses.
+- Phone numbers.
+- Email addresses.
+- Payment references.
+- Gateway credentials.
+- API keys.
+- Database connection strings.
+
+Requirements:
+
+- HTTPS in production.
+- Secure credential storage.
+- Environment-based secrets.
+- No hardcoded production credentials.
+- No secrets in frontend bundles.
+- No secrets in Git.
+- Appropriate encryption at rest through supported infrastructure.
+- Appropriate encryption in transit.
+- Sensitive field access controls.
+- Log redaction.
+- Safe error messages.
+- Backup protection.
+
+Do not store raw payment card numbers or CVV values.
+
+Do not unnecessarily encrypt every ordinary database field in application code without considering indexing, searchability, key management, and operational requirements.
+
+Use a suitable encryption strategy based on the sensitivity and operational requirements of the data.
+
+---
+
+# PHASE 11: LOGGING, MONITORING, BACKUP AND RECOVERY
+
+Improve production observability where supported.
+
+Monitor:
+
+- API response times.
+- Error rates.
+- Database query latency.
+- Database connection health.
+- Memory usage.
+- CPU usage.
+- Product listing performance.
+- Infinite scroll request failures.
+- Payment verification failures.
+- Background job failures.
+
+Implement structured logging.
+
+Use request correlation IDs where appropriate.
+
+Never log passwords, tokens, full payment credentials, or unnecessary personal information.
+
+Inspect the existing backup and recovery architecture.
+
+Ensure that:
+
+- Database backups are configured.
+- Backup retention is defined.
+- Access to backups is restricted.
+- Recovery procedures are documented.
+- Restoration can be tested safely.
+
+Do not claim backups are operational unless the configured infrastructure actually performs and verifies them.
+
+---
+
+# PHASE 12: PRODUCTION PERFORMANCE TARGETS
+
+Measure the actual application rather than making unsupported performance claims.
+
+Use the following as engineering targets under a documented test environment.
+
+### Product API
+
+- First page returns no more than 20 products.
+- Subsequent pages return no more than 20 products.
+- No unbounded product query.
+- Stable pagination without duplicates or missing records.
+- Efficient query execution plans.
+
+### Frontend
+
+- Do not render the entire product catalog.
+- Keep loading skeletons lightweight.
+- Avoid layout shifts.
+- Prevent duplicate requests.
+- Avoid excessive DOM growth.
+- Keep interactions responsive.
+
+### Core Web Vitals
+
+Evaluate:
+
+- Largest Contentful Paint (LCP).
+- Interaction to Next Paint (INP).
+- Cumulative Layout Shift (CLS).
+
+Use current recommended web performance targets where applicable.
+
+### Backend and Database
+
+Measure:
+
+- Query latency.
+- API latency.
+- Memory consumption.
+- Database connection usage.
+- Error rate.
+- Concurrent request handling.
+
+Do not optimize blindly.
+
+Identify actual bottlenecks and verify improvements with measurements.
+
+---
+
+# PHASE 13: AUTOMATED TESTING AND LOAD TESTING
+
+Testing is mandatory.
+
+Reuse the project's existing test infrastructure where possible.
+
+Do not unnecessarily introduce duplicate testing frameworks.
+
+## 13.1 Security Tests
+
+Test:
+
+- Authentication bypass.
+- Authorization bypass.
+- IDOR.
+- NoSQL injection.
+- SQL injection where relevant.
+- XSS.
+- CSRF where applicable.
+- Mass assignment.
+- Invalid request payloads.
+- Rate-limit behavior.
+- Sensitive information exposure.
+- Unsafe file uploads.
+- Privilege escalation.
+
+## 13.2 Schema and Business Logic Tests
+
+Test:
+
+- Invalid product prices.
+- Negative stock.
+- Invalid product references.
+- Duplicate SKU.
+- Invalid category relationships.
+- Invalid order quantities.
+- Coupon expiry.
+- Discount calculation.
+- Concurrent inventory changes.
+- Duplicate order submission.
+- Payment status manipulation.
+
+## 13.3 Infinite Scroll Tests
+
+Test:
+
+1. Initial load returns 20 products or fewer if fewer remain.
+2. Second request returns the next batch.
+3. Repeated scrolling does not trigger duplicate requests.
+4. Products do not duplicate.
+5. Products are not skipped between cursors.
+6. Loading skeleton appears during real pending requests.
+7. No more requests occur after hasMore becomes false.
+8. Changing search resets pagination.
+9. Changing filters resets pagination.
+10. Changing sorting resets pagination.
+11. Stale requests cannot overwrite newer results.
+12. Network failures can be retried safely.
+13. Empty result states work.
+14. Mobile scrolling works correctly.
+
+## 13.4 Load and Stress Testing
+
+Use a safe, isolated test environment.
+
+Simulate large catalog datasets, including:
+
+- 10,000 products.
+- 100,000 products.
+- 500,000 products.
+- 1,000,000 products, where infrastructure permits.
+
+These are test scenarios, not a requirement to create fake production records.
+
+Measure:
+
+- Product listing latency.
+- Search latency.
+- Filter latency.
+- Pagination performance.
+- Database query execution.
+- Memory usage.
+- CPU usage.
+- Connection usage.
+- Concurrent user behavior.
+
+Test concurrent browsing and request spikes.
+
+Use an appropriate load-testing tool already available in the project or introduce one only when necessary.
+
+Never run destructive load tests against the production database.
+
+Do not generate uncontrolled load against third-party payment or storage providers.
+
+## 13.5 Regression Testing
+
+Verify that all existing features continue to work:
+
+- Homepage.
+- Navigation.
+- Product listing.
+- Product details.
+- Product variants.
+- Search.
+- Filters.
+- Sorting.
+- Cart.
+- Wishlist.
+- Checkout.
+- Payments.
+- Orders.
+- Customer accounts.
+- Admin Panel.
+- Inventory.
+- Coupons.
+- CMS.
+- Image uploads.
+- Existing APIs.
+
+A security or performance improvement must not break existing business functionality.
+
+---
+
+# PHASE 14: STRICT CHANGE CONTROL
+
+This is a non-negotiable requirement.
+
+You are modifying an existing application, not building a new one.
+
+### Do not unnecessarily modify:
+
+- Existing business logic.
+- Existing functions.
+- Existing components.
+- Existing API endpoints.
+- Existing routes.
+- Existing URLs.
+- Existing database schemas.
+- Existing authentication.
+- Existing payment logic.
+- Existing order logic.
+- Existing product card design.
+- Existing homepage design.
+- Existing checkout design.
+- Existing Admin Panel design.
+- Existing navigation.
+- Existing CSS.
+- Existing responsive layouts.
+- Existing integrations.
+
+Do not perform broad refactoring.
+
+Do not rename working files or functions unnecessarily.
+
+Do not replace existing working libraries or infrastructure without a demonstrated technical reason.
+
+Do not introduce unnecessary dependencies.
+
+Do not remove existing functionality.
+
+Do not replace genuine backend operations with mock data.
+
+Do not change a correctly working module simply because you can implement it differently.
+
+## Required implementation policy
+
+For every discovered issue:
+
+1. Identify the exact issue.
+2. Locate its root cause.
+3. Identify affected files and dependencies.
+4. Determine whether the issue is security-critical, data-critical, performance-related, or cosmetic.
+5. Check the impact of the proposed fix.
+6. Implement the smallest safe correction.
+7. Test the affected functionality.
+8. Run regression tests on dependent modules.
+
+If an existing implementation is already secure, scalable, and functioning correctly, leave it untouched.
+
+If a required change affects a shared component, inspect all usages before modifying it.
+
+Preserve existing API contracts wherever possible.
+
+If an API contract change is unavoidable, update all dependent callers safely and document the compatibility impact.
+
+---
+
+# PHASE 15: IMPLEMENTATION ORDER
+
+Follow this implementation order.
+
+### Step 1: Audit
+Understand the entire project and document findings.
+
+### Step 2: Risk Classification
+Classify findings:
+
+- CRITICAL: Immediate security or data-integrity risk.
+- HIGH: Serious vulnerability or scalability issue.
+- MEDIUM: Performance or reliability issue.
+- LOW: Minor improvement.
+
+### Step 3: Security Repairs
+Fix verified critical and high-risk security issues first.
+
+### Step 4: Schema and Business Logic
+Strengthen validation and correct verified data-integrity defects.
+
+### Step 5: Database Optimization
+Improve indexes, projections, query patterns, and pagination.
+
+### Step 6: Infinite Scrolling
+Implement the 20-product server-side pagination and premium skeleton experience.
+
+### Step 7: Performance Optimization
+Optimize verified memory, rendering, caching, and concurrency bottlenecks.
+
+### Step 8: Testing
+Run security, unit, integration, E2E, load, and regression tests.
+
+### Step 9: Final Verification
+Confirm that the existing application still works correctly.
+
+Do not perform all modifications simultaneously.
+
+Work incrementally and verify each logical change.
+
+---
+
+# PHASE 16: FINAL PRODUCTION ACCEPTANCE CRITERIA
+
+The implementation is considered complete only when the following requirements are verified:
+
+1. The complete application has been audited.
+2. Critical security vulnerabilities have been addressed.
+3. Sensitive information is appropriately protected.
+4. Backend validation is enforced.
+5. Database schema integrity is maintained.
+6. Critical business logic is protected against invalid input and concurrent operations.
+7. Product listing never loads the entire catalog.
+8. Product APIs enforce a maximum batch size of 20 for the specified public listing flow.
+9. Infinite scrolling works with stable pagination.
+10. No duplicate or skipped products appear across pages.
+11. Search, filtering, and sorting work with pagination.
+12. Premium skeleton loading works correctly.
+13. Backend and frontend memory usage remain bounded by design.
+14. Database queries use appropriate indexes and efficient execution plans.
+15. Existing application functionality remains intact.
+16. Security tests pass.
+17. Business logic tests pass.
+18. Infinite scrolling tests pass.
+19. Load testing results are documented.
+20. Regression tests pass.
+
+Do not claim the application is capable of handling one million products merely because pagination was added.
+
+The scalability claim must be supported by actual query analysis, appropriate indexes, bounded resource usage, and measured testing results under a documented environment.
+
+---
+
+# PHASE 17: FINAL IMPLEMENTATION AND SECURITY REPORT
+
+Provide a detailed final report.
+
+Include:
+
+### Project Audit
+- Files inspected.
+- Architecture understood.
+- Modules reviewed.
+- Critical dependencies discovered.
+
+### Security
+- Vulnerabilities found.
+- Vulnerabilities fixed.
+- Authentication improvements.
+- Authorization improvements.
+- API security improvements.
+- Schema validation improvements.
+- Data privacy improvements.
+
+### Database
+- Models inspected.
+- Schemas modified.
+- Indexes added or modified.
+- Query optimizations.
+- Data integrity improvements.
+- Migration details.
+
+### Scalability
+- Existing product loading problems.
+- Pagination strategy.
+- Database query improvements.
+- Memory optimization.
+- Caching changes.
+- Load-testing results.
+
+### Infinite Scroll
+- API endpoint.
+- Page size.
+- Pagination strategy.
+- Cursor behavior.
+- Skeleton implementation.
+- Duplicate request prevention.
+- Search/filter synchronization.
+- Mobile testing.
+
+### Change Control
+- Files created.
+- Files modified.
+- Files intentionally left untouched.
+- Reason for every important modification.
+
+### Test Results
+- Unit tests.
+- Integration tests.
+- E2E tests.
+- Security tests.
+- Load tests.
+- Regression tests.
+
+Use these labels:
+
+- PASS: Implemented and verified.
+- FAIL: A test failed or a defect remains.
+- FIXED: A verified defect was corrected and retested.
+- BLOCKED: Requires external infrastructure, credentials, or access.
+- NOT TESTED: Could not be verified.
+- NOT APPLICABLE: The requirement does not apply.
+
+Never mark an untested requirement as PASS.
+
+Never claim a security audit is complete if only a few files were inspected.
+
+Never claim one-million-product scalability without measured evidence.
+
+Never claim that a vulnerability is fixed without retesting the relevant attack scenario.
+
+---
+
+# FINAL NON-NEGOTIABLE INSTRUCTION
+
+First, read and understand the complete existing project.
+
+Then perform a systematic production security, database, business logic, memory, and scalability audit.
+
+Implement only the verified changes necessary to improve the application's actual security, data integrity, and performance.
+
+The product catalog must support scalable server-side loading, with exactly 20 products per page request and premium infinite scrolling.
+
+The backend must validate all critical business operations.
+
+The database must enforce appropriate data integrity.
+
+The frontend must never load the entire product catalog.
+
+The application must not consume unbounded memory or issue uncontrolled database queries.
+
+Most importantly:
+
+**If an existing function, component, business rule, API, URL, route, or design is already correct, DO NOT TOUCH IT.**
+
+Do not introduce unnecessary changes.
+
+Do not break existing functionality.
+
+Do not create new problems while fixing existing ones.
+
+Do not use fake performance improvements or unsupported security claims.
+
+**The ultimate goal is a secure, reliable, scalable, production-grade e-commerce application capable of handling a very large product catalog while preserving the existing project's functionality, architecture, and design.**

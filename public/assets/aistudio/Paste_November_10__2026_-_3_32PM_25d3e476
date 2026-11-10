@@ -1,0 +1,1026 @@
+# MASTER PROMPT — HIGH-END PRODUCTION E-COMMERCE CHECKOUT, BANGLADESH LOCATION SELECTOR, SAVED ADDRESS MANAGEMENT & COMPLETE ORDER LIFECYCLE
+
+**ROLE:** Act as a Principal Software Architect, Senior Full-Stack Engineer, Backend Engineer, Database Architect, E-commerce Business Logic Specialist, Application Security Engineer, and QA Automation Engineer.
+
+You are working on an existing e-commerce application. Your responsibility is to audit, improve, and implement a complete production-ready checkout and order management system.
+
+This is NOT a frontend-only task.
+
+The entire workflow must work correctly across:
+
+- Frontend.
+- Backend.
+- REST APIs.
+- MongoDB Atlas.
+- Customer Account.
+- Saved Address Management.
+- Checkout.
+- Order Creation.
+- Order History.
+- Admin Panel.
+- Admin Order Management.
+- Inventory Management.
+- Existing Payment and Delivery integrations.
+
+**PRIMARY OBJECTIVE: Build a reliable, secure, end-to-end e-commerce order system using the mandatory NPM package `bd-divisions-to-unions` for Bangladesh's administrative address hierarchy.**
+
+Do not start coding immediately. Read and understand the existing project first.
+
+---
+
+# PHASE 1 — COMPLETE CODEBASE AUDIT
+
+Before changing anything, inspect the entire repository.
+
+Identify:
+
+1. Frontend framework and architecture.
+2. Backend framework and architecture.
+3. Existing Checkout Page.
+4. Existing address form components.
+5. Existing order creation flow.
+6. Existing Order schema/model.
+7. Existing User schema/model.
+8. Existing saved address functionality.
+9. Existing authentication and authorization.
+10. Existing Cart and Wishlist integration.
+11. Existing payment methods and payment verification.
+12. Existing delivery and shipping-charge logic.
+13. Existing inventory and stock management.
+14. Existing Admin Panel order management.
+15. Existing order search, filtering, and pagination.
+16. Existing notification and email systems.
+17. MongoDB Atlas configuration.
+18. API routes, controllers, services, middleware, and validators.
+
+Determine exactly which functionality is working, partially working, missing, duplicated, or broken.
+
+Trace the complete workflow from the customer placing an order to the administrator managing that order.
+
+Do not assume that a frontend success message means an order was successfully created.
+
+Prepare a technical implementation plan before modifying files.
+
+# PHASE 2 — MANDATORY BANGLADESH LOCATION NPM PACKAGE
+
+<escape>MANDATORY PACKAGE: bd-divisions-to-unions</escape>
+
+Official npm package name:
+
+`bd-divisions-to-unions`
+
+Installation:
+
+```bash
+npm install bd-divisions-to-unions
+```
+
+If the project uses pnpm or yarn, use the equivalent installation command.
+
+**THIS PACKAGE IS REQUIRED. DO NOT SUBSTITUTE IT WITH HARDCODED LOCATION DATA OR AN UNRELATED ADDRESS LIBRARY.**
+
+Official package reference:
+
+https://www.npmjs.com/package/bd-divisions-to-unions
+
+Documentation:
+
+https://github.com/Azim-Ahmed/bd-divisons-to-unions
+
+## 2.1 Required Package Functions
+
+Use the package's actual documented functions:
+
+```typescript
+import {
+  getAllDivision,
+  getDistricts,
+  getUpazilas,
+  getUnions
+} from "bd-divisions-to-unions";
+```
+
+Use the actual package exports and TypeScript definitions. Do not invent function names or data structures.
+
+Required hierarchy:
+
+```text
+Division
+   ↓
+District
+   ↓
+Upazila
+   ↓
+Union
+```
+
+Use the package's actual returned values and IDs.
+
+Support Bangla labels by default where appropriate. English labels may be supported through the package's documented language parameter.
+
+Do not manually recreate the package's location dataset.
+
+## 2.2 Cascading Address Dropdowns
+
+Implement a dependent dropdown system.
+
+When the customer selects a Division:
+
+- Load only the Districts belonging to that Division.
+
+When the customer selects a District:
+
+- Load only the Upazilas belonging to that District.
+
+When the customer selects an Upazila:
+
+- Load only the Unions belonging to that Upazila.
+
+When the parent selection changes:
+
+- Clear invalid child selections.
+- Reset dependent dropdown values.
+- Prevent submitting inconsistent location combinations.
+
+Example:
+
+```text
+Division: ঢাকা
+District: ঢাকা
+Upazila: সাভার
+Union: [Actual unions returned by the package]
+```
+
+This is an illustrative example. Actual options must come from the package.
+
+## 2.3 Important Geographic Edge Case
+
+Bangladesh city corporations and metropolitan areas may not map neatly to a Union.
+
+Do not force an incorrect Union selection or fabricate an administrative location for an urban address.
+
+Use the mandatory package for the supported administrative hierarchy. Where the selected location has no applicable Union, provide an appropriate area, ward, or locality field and handle it explicitly.
+
+Keep this exception compatible with the same address and order data model.
+
+## 2.4 Package Integration Requirements
+
+- Install the exact required dependency.
+- Inspect the package version and exports.
+- Verify frontend bundler compatibility.
+- Verify backend runtime compatibility.
+- Handle CommonJS/ESM interoperability correctly.
+- Reuse the package rather than copying its dataset.
+- Avoid duplicate location datasets.
+- Ensure the selected parent-child hierarchy is valid.
+- Do not silently fall back to hardcoded initial data.
+- If the package is incompatible with the existing build environment, investigate and resolve the compatibility issue without replacing the mandatory package.
+
+Use the package for actual address selection and validation, not merely as an installed but unused dependency.
+
+# PHASE 3 — PREMIUM CHECKOUT ADDRESS FORM
+
+Improve the existing Checkout Page without unnecessarily changing the overall website design.
+
+The address form should feel like a premium, professional e-commerce checkout experience.
+
+## 3.1 Required Address Fields
+
+Implement the appropriate fields:
+
+**Customer Information**
+- Full Name.
+- Mobile Number.
+- Email Address, if required by the existing checkout flow.
+
+**Administrative Address**
+- Division.
+- District.
+- Upazila / Thana.
+- Union, where applicable.
+
+**Detailed Delivery Address**
+- Village / Area / Locality.
+- House Number.
+- Road Number / Street.
+- Postal Code, where applicable.
+- Additional delivery instructions.
+
+Ensure field labels, placeholders, and validation messages are clear.
+
+Support Bangla and English labels where appropriate.
+
+## 3.2 Address Form UI/UX
+
+Requirements:
+
+- Premium visual appearance.
+- Consistent input styling.
+- Clear field labels.
+- Proper spacing.
+- Responsive layout.
+- Mobile-friendly dropdowns.
+- Loading states where needed.
+- Validation feedback.
+- Accessible keyboard interactions.
+- Clear selected values.
+- Proper disabled states for dependent fields.
+
+Do not show all 4,500+ unions as one enormous dropdown.
+
+Only load or calculate the relevant child options after the parent selection.
+
+## 3.3 Address Validation
+
+The frontend must validate required fields for a good user experience.
+
+The backend must independently validate the submitted address.
+
+Verify:
+
+- Name is valid.
+- Mobile number follows accepted Bangladesh phone-number rules.
+- Division exists.
+- District belongs to the selected Division.
+- Upazila belongs to the selected District.
+- Union belongs to the selected Upazila when applicable.
+- Detailed address is not empty.
+- Invalid combinations are rejected.
+
+Never trust the frontend to validate geographic relationships.
+
+Use the mandatory package on the backend too, where compatible, so the server can verify the submitted IDs against the authoritative package data.
+
+# PHASE 4 — AUTOMATIC SAVED ADDRESS SYSTEM
+
+This is a critical requirement.
+
+When a logged-in customer successfully places their first order, the delivery address should be saved to their account.
+
+The next time the same customer opens Checkout, the previously saved address should automatically appear as the selected delivery address.
+
+The customer must still be able to change it.
+
+## 4.1 First Successful Order
+
+After a successful order creation:
+
+1. Validate the submitted address.
+2. Create the order in MongoDB Atlas.
+3. Save or update the customer's address record.
+4. Associate the saved address with the authenticated customer.
+5. Set it as the default address if appropriate.
+6. Return the successful order response.
+
+Do not save an address as the default merely because the customer opened Checkout or typed into the form.
+
+Persist it after a valid successful order or an explicit Save Address action.
+
+## 4.2 Next Checkout
+
+When the customer returns to Checkout:
+
+- Retrieve their saved address from the backend.
+- Automatically preselect the default address.
+- Populate the form with the previously saved values.
+- Restore Division, District, Upazila, and Union in the correct dependency order.
+- Show the previously saved detailed address.
+- Allow the customer to edit any field.
+- Allow the customer to choose another saved address.
+- Allow the customer to add a new address.
+
+Do not require the customer to enter the same information repeatedly.
+
+## 4.3 Address Book Management
+
+Where supported by the existing Account system, implement:
+
+- Add Address.
+- Edit Address.
+- Delete Address.
+- Set Default Address.
+- Select Delivery Address.
+- View Saved Addresses.
+
+Prevent deletion of an address that is currently being edited or used in an active checkout operation from causing inconsistent state.
+
+A user's saved addresses must never be accessible or modifiable by another user.
+
+## 4.4 Address Persistence
+
+Save actual address information in MongoDB Atlas.
+
+Suggested conceptual structure:
+
+```typescript
+{
+  fullName: string,
+  phone: string,
+
+  division: {
+    id: string,
+    name: string
+  },
+
+  district: {
+    id: string,
+    name: string
+  },
+
+  upazila: {
+    id: string,
+    name: string
+  },
+
+  union: {
+    id: string,
+    name: string
+  },
+
+  locality: string,
+  house: string,
+  road: string,
+  postalCode: string,
+  deliveryInstructions: string,
+
+  isDefault: boolean
+}
+```
+
+This is a conceptual example, not an instruction to replace the existing schema blindly.
+
+Use appropriate nullable or optional fields for locations where a Union does not apply.
+
+Use stable administrative IDs wherever available. Preserve readable location names for displaying historical orders.
+
+# PHASE 5 — ORDER ADDRESS SNAPSHOT
+
+This requirement is extremely important.
+
+An order must contain its own immutable snapshot of the delivery address at the time the order is placed.
+
+For example:
+
+1. Customer places an order using Address A.
+2. The order stores Address A as its delivery snapshot.
+3. Later, the customer edits their saved address to Address B.
+4. The previous order must still show Address A.
+
+Never dynamically replace historical order addresses using the customer's current profile address.
+
+Store the relevant address fields directly in the order record or through a properly immutable snapshot structure.
+
+The Admin Panel must always show the actual address associated with that specific order.
+
+# PHASE 6 — COMPLETE ORDER CREATION SYSTEM
+
+Implement a reliable end-to-end order creation process.
+
+When the customer clicks Place Order:
+
+1. Verify the customer session.
+2. Retrieve or verify the cart.
+3. Validate the products.
+4. Verify product availability.
+5. Verify variants and selected options.
+6. Verify quantities.
+7. Recalculate product prices on the server.
+8. Recalculate discounts on the server.
+9. Calculate shipping fees using existing business rules.
+10. Calculate the final order total.
+11. Validate the delivery address.
+12. Validate payment method.
+13. Create the order in MongoDB Atlas.
+14. Update inventory safely.
+15. Persist the address for authenticated customers.
+16. Update or clear the cart only after the order has been successfully committed.
+17. Return the actual order confirmation.
+
+**NEVER TRUST FRONTEND-SUBMITTED PRICES, DISCOUNTS, SHIPPING CHARGES, OR GRAND TOTALS.**
+
+The backend must calculate financial values using trusted database records and configured business rules.
+
+## 6.1 Order Number
+
+Generate a unique order number.
+
+Requirements:
+
+- No accidental duplicates.
+- Appropriate database indexing.
+- Secure generation.
+- Easy identification in the Admin Panel.
+- Proper order lookup.
+
+Do not expose internal database credentials or sensitive identifiers unnecessarily.
+
+## 6.2 Duplicate Order Prevention
+
+Prevent duplicate orders caused by:
+
+- Double-clicking Place Order.
+- Repeated API requests.
+- Browser refresh.
+- Network retries.
+- Multiple simultaneous requests.
+
+Use an appropriate idempotency strategy.
+
+Disable or lock the submit action while processing, but do not rely on frontend button disabling alone.
+
+The backend must prevent duplicate processing.
+
+## 6.3 Inventory Consistency
+
+Implement safe stock management.
+
+Verify:
+
+- Sufficient stock before order confirmation.
+- Correct quantity reservation or deduction according to the existing payment/order policy.
+- No negative inventory.
+- No overselling due to concurrent requests.
+- Correct restoration of inventory on eligible cancellations or failed transactions.
+- Variant-level stock correctness.
+
+Use MongoDB transactions when supported by the deployed database topology and existing architecture.
+
+If transactions are unavailable, implement an appropriately safe alternative and document the limitations.
+
+# PHASE 7 — PAYMENT AND SHIPPING INTEGRATION
+
+First inspect existing payment and delivery methods.
+
+Preserve all existing working integrations.
+
+Do not invent payment success.
+
+For online payments:
+
+- Verify payment results server-side.
+- Validate provider callbacks.
+- Prevent replay attacks.
+- Avoid trusting client-side payment status.
+- Handle pending, successful, failed, and cancelled payments.
+- Ensure order status and payment status remain separate where appropriate.
+
+For Cash on Delivery, follow the existing business rules.
+
+Shipping charges must be calculated on the backend.
+
+Do not hardcode arbitrary shipping prices.
+
+If delivery charges vary by location, use the existing shipping configuration or a clearly defined configurable business rule.
+
+Never invent courier service availability or delivery estimates.
+
+# PHASE 8 — CUSTOMER ORDER EXPERIENCE
+
+After successful order placement, provide a professional confirmation page.
+
+Display:
+
+- Order number.
+- Order date.
+- Ordered products.
+- Quantities.
+- Product totals.
+- Shipping fee.
+- Discount.
+- Grand total.
+- Payment method.
+- Payment status.
+- Order status.
+- Delivery address snapshot.
+
+Provide an order details link.
+
+## 8.1 My Orders
+
+The authenticated customer must be able to:
+
+- View all their orders.
+- View individual order details.
+- Search or filter their orders where supported.
+- View order status.
+- View payment status.
+- View delivery address.
+- View order items and totals.
+- Request cancellation where the business rules allow it.
+
+Only show orders belonging to the authenticated user.
+
+Never trust a user-provided customer ID to retrieve another customer's orders.
+
+## 8.2 Order Cancellation
+
+Implement cancellation according to existing business rules.
+
+Verify:
+
+- Which order statuses allow cancellation.
+- Whether payment has already been collected.
+- Whether inventory should be restored.
+- Whether a refund workflow is required.
+- Whether an administrator must approve the cancellation.
+
+Do not allow customers to arbitrarily change order status.
+
+# PHASE 9 — ADMIN PANEL ORDER MANAGEMENT
+
+The Admin Panel must be fully synchronized with real orders stored in MongoDB Atlas.
+
+This is not just a frontend table.
+
+## 9.1 Order Dashboard
+
+Display real database-backed statistics where supported:
+
+- Total Orders.
+- Pending Orders.
+- Confirmed Orders.
+- Processing Orders.
+- Shipped Orders.
+- Delivered Orders.
+- Cancelled Orders.
+- Revenue.
+- Pending Payments.
+- Paid Orders.
+
+Use actual database queries or aggregations.
+
+Define the revenue calculation clearly and avoid counting cancelled, refunded, or unpaid orders incorrectly.
+
+## 9.2 Order List
+
+Create or improve the existing order management table.
+
+Display:
+
+- Order Number.
+- Customer Name.
+- Phone Number.
+- Order Date.
+- Product Summary.
+- Total Amount.
+- Payment Method.
+- Payment Status.
+- Order Status.
+- Actions.
+
+Implement:
+
+- Search by order number.
+- Search by customer name.
+- Search by phone.
+- Filter by order status.
+- Filter by payment status.
+- Filter by date.
+- Sorting.
+- Pagination.
+
+Search and filters must work against actual backend data.
+
+Do not fetch the entire order collection to filter everything in the browser.
+
+## 9.3 Order Details
+
+When an administrator opens an order, display:
+
+- Full customer information.
+- Exact delivery address snapshot.
+- Ordered products.
+- Product variants.
+- Quantity.
+- Price at purchase time.
+- Discount.
+- Shipping charge.
+- Final total.
+- Payment details.
+- Order status history.
+- Relevant notes.
+
+Use actual order records.
+
+## 9.4 Order Status Management
+
+Allow authorized administrators to manage the order lifecycle according to valid transitions.
+
+Possible statuses:
+
+```text
+Pending
+   ↓
+Confirmed
+   ↓
+Processing
+   ↓
+Shipped
+   ↓
+Delivered
+```
+
+Additional terminal states may include:
+
+- Cancelled.
+- Failed.
+
+Do not allow arbitrary invalid status transitions.
+
+Maintain a status history containing:
+
+- Previous status.
+- New status.
+- Timestamp.
+- Responsible administrator or system actor.
+- Optional note.
+
+Protect status updates with backend authorization.
+
+## 9.5 Admin Order Search Synchronization
+
+Whenever a new customer order is successfully created:
+
+- It must become visible in the Admin Panel.
+- Order counts must update.
+- Search must find the order.
+- Filters must include the order.
+- Order details must load correctly.
+- The delivery address must match the order snapshot.
+
+Avoid stale cached order lists.
+
+# PHASE 10 — DATABASE SCHEMA AND VALIDATION
+
+Audit existing User, Address, Cart, Product, and Order schemas.
+
+Extend existing schemas instead of creating duplicate collections unnecessarily.
+
+Implement strict backend validation.
+
+## Address validation
+
+- Required fields.
+- Correct phone format.
+- Valid administrative IDs.
+- Correct parent-child location relationships.
+- Maximum string lengths.
+- Safe text handling.
+- Correct urban-address exceptions.
+
+## Order validation
+
+- Valid customer reference.
+- Valid product references.
+- Positive integer quantities.
+- Valid product variants.
+- Server-calculated prices.
+- Valid payment method.
+- Valid delivery address.
+- Valid order status.
+- Unique order number.
+- Valid totals.
+
+## Security validation
+
+- Reject unexpected fields.
+- Prevent mass assignment.
+- Prevent client-controlled role or status escalation.
+- Prevent malformed MongoDB ObjectIds.
+- Prevent NoSQL injection.
+- Validate every API request independently.
+
+Use the existing validation library if suitable.
+
+Do not rely on frontend-only validation.
+
+# PHASE 11 — SECURITY HARDENING
+
+Perform a security audit across the entire checkout and order lifecycle.
+
+Requirements:
+
+1. Secure authentication.
+2. Admin-only order management endpoints.
+3. User ownership verification.
+4. Secure address access.
+5. Secure payment verification.
+6. Rate limiting.
+7. Request validation.
+8. NoSQL injection prevention.
+9. Mass-assignment protection.
+10. Safe error handling.
+11. Proper CORS configuration.
+12. Secure cookie and session configuration where applicable.
+13. No secrets in frontend bundles.
+14. Safe handling of personal data.
+15. No sensitive data in unnecessary logs.
+
+A customer must never be able to:
+
+- Read another customer's orders.
+- Modify another customer's saved addresses.
+- Change their own role to admin.
+- Change an order's total through frontend manipulation.
+- Mark an unpaid order as paid.
+- Bypass stock validation.
+- Arbitrarily change order status.
+- Modify a historical order address.
+
+Do not log passwords, payment credentials, tokens, or unnecessary personal information.
+
+# PHASE 12 — API ARCHITECTURE
+
+Audit existing API conventions before creating endpoints.
+
+Use the existing route structure and naming conventions.
+
+Where functionality is missing, implement appropriate endpoints for:
+
+**Location data**
+- Divisions.
+- Districts.
+- Upazilas.
+- Unions.
+
+These may be provided by a shared location service backed by the mandatory package. Avoid unnecessary database duplication of static geographic data.
+
+**Customer addresses**
+- List saved addresses.
+- Get default address.
+- Create address.
+- Update address.
+- Delete address.
+- Set default address.
+
+**Orders**
+- Create order.
+- List authenticated customer's orders.
+- Get customer's order details.
+- Request eligible cancellation.
+
+**Admin orders**
+- List orders.
+- Search orders.
+- Filter orders.
+- Get order details.
+- Update valid order status.
+- View order statistics.
+
+These are conceptual API capabilities, not a requirement to duplicate endpoints that already exist.
+
+Use consistent:
+
+- HTTP status codes.
+- Response structures.
+- Validation errors.
+- Authorization.
+- Pagination metadata.
+- Error handling.
+
+# PHASE 13 — RESPONSIVE CHECKOUT AND ACCESSIBILITY
+
+Test the entire Checkout and address form on:
+
+- Large desktop.
+- Laptop.
+- Tablet.
+- Standard mobile.
+- Very narrow mobile.
+
+Ensure:
+
+- No horizontal overflow.
+- Dropdowns remain accessible.
+- Long location names display correctly.
+- Buttons are touch-friendly.
+- Form fields are properly sized.
+- Validation messages do not break layouts.
+- Keyboard navigation works.
+- Focus states are visible.
+- The form remains usable on small screens.
+
+Preserve the existing visual identity.
+
+# PHASE 14 — TESTING AND END-TO-END VERIFICATION
+
+Use the existing test framework and add targeted tests where needed.
+
+Do not claim success based on code inspection alone.
+
+## Test A — Mandatory NPM package
+
+1. Verify the exact package is installed.
+2. Verify imports work.
+3. Verify divisions load.
+4. Verify districts depend on division.
+5. Verify upazilas depend on district.
+6. Verify unions depend on upazila.
+7. Verify Bangla and English labels if both are used.
+8. Verify invalid parent-child combinations are rejected.
+9. Verify production build compatibility.
+
+## Test B — First customer order
+
+1. Authenticate a customer.
+2. Add actual products to the cart.
+3. Open Checkout.
+4. Select a Division.
+5. Select a District.
+6. Select an Upazila.
+7. Select a Union where applicable.
+8. Enter detailed address information.
+9. Place an order.
+10. Verify the backend response.
+11. Verify the order exists in MongoDB Atlas.
+12. Verify the saved address exists in the customer's account.
+13. Verify the order contains its own address snapshot.
+14. Verify the cart is handled correctly.
+
+## Test C — Repeat order
+
+1. Open Checkout again as the same customer.
+2. Verify the previous address is automatically selected.
+3. Verify all hierarchical fields are restored correctly.
+4. Change the address.
+5. Place another order.
+6. Verify the updated address is saved appropriately.
+7. Verify the earlier order's address remains unchanged.
+
+## Test D — Address security
+
+1. Create two test customers.
+2. Verify Customer A cannot read Customer B's addresses.
+3. Verify Customer A cannot modify Customer B's addresses.
+4. Verify Customer A cannot delete Customer B's addresses.
+5. Verify unauthorized address API requests are rejected.
+
+## Test E — Order lifecycle
+
+1. Create an order.
+2. Verify it appears in Admin Panel.
+3. Search by order number.
+4. Search by phone number.
+5. Filter by order status.
+6. Open order details.
+7. Verify address snapshot.
+8. Update order status.
+9. Verify status history.
+10. Verify customer order history reflects valid updates.
+
+## Test F — Financial and inventory integrity
+
+1. Manipulate frontend product price.
+2. Manipulate frontend discount.
+3. Manipulate frontend shipping charge.
+4. Manipulate frontend grand total.
+5. Verify backend recalculates trusted values.
+6. Attempt ordering more than available stock.
+7. Verify overselling is prevented.
+8. Test duplicate submissions.
+9. Test concurrent order requests.
+10. Verify stock restoration for eligible cancellations.
+
+## Test G — Regression
+
+Verify that existing functionality remains operational:
+
+- Authentication.
+- Registration and login.
+- Account page.
+- Cart.
+- Wishlist.
+- Product details.
+- Product search.
+- Checkout.
+- Payment integrations.
+- Admin Panel.
+- Existing navigation.
+- Existing APIs.
+- Existing routes.
+
+# PHASE 15 — STRICT NON-REGRESSION RULES
+
+This is an existing e-commerce project.
+
+Do not rebuild it from scratch.
+
+Do not replace working architecture unnecessarily.
+
+Do not remove existing features.
+
+Do not break existing routes or URLs.
+
+Do not change unrelated UI components.
+
+Do not create duplicate User, Address, or Order models if suitable models already exist.
+
+Do not introduce fake orders or fake customer data.
+
+Do not use hardcoded address lists instead of the mandatory package.
+
+Do not trust frontend totals.
+
+Do not report an order as successful until the backend confirms successful persistence.
+
+Do not clear the cart before a successful order is committed.
+
+Do not expose customer addresses publicly.
+
+Do not modify unrelated business logic.
+
+Make the smallest safe set of changes necessary.
+
+# PHASE 16 — FINAL PRODUCTION ENGINEERING REPORT
+
+After completing the implementation, provide a detailed report.
+
+## A. Initial Audit Findings
+
+Explain what was previously implemented, what was missing, and what was broken.
+
+## B. Mandatory Package Verification
+
+Confirm:
+
+- Exact package name.
+- Installed version.
+- Installation status.
+- Actual functions used.
+- Frontend compatibility.
+- Backend compatibility.
+- Production build result.
+
+## C. Files Modified
+
+List the important frontend, backend, model, controller, service, middleware, and test files.
+
+## D. Database Changes
+
+Explain the changes to:
+
+- User schema.
+- Saved Address structure.
+- Order schema.
+- Indexes.
+- Order snapshots.
+- Any required migration or backward compatibility.
+
+## E. API Changes
+
+List the existing APIs repaired and any new APIs added.
+
+## F. Actual Test Results
+
+Use these exact labels:
+
+- PASS — Actually tested and working.
+- FAIL — Tested and not working.
+- BLOCKED — Requires unavailable configuration, credentials, or dependencies.
+- NOT TESTED — Not executed.
+
+## G. Production Readiness
+
+Report:
+
+- Order creation reliability.
+- Address persistence.
+- Address security.
+- Inventory consistency.
+- Payment verification.
+- Admin synchronization.
+- Responsive behavior.
+- Remaining risks.
+
+Never claim a feature is production-ready if it has not been tested.
+
+---
+
+# FINAL ACCEPTANCE CRITERIA
+
+The implementation is complete only when:
+
+1. The exact `bd-divisions-to-unions` package is installed and actively used.
+2. Checkout has a functional Bangladesh Division → District → Upazila → Union selector.
+3. Invalid administrative combinations are rejected by the backend.
+4. A successful first order saves the customer's address.
+5. The next checkout automatically selects the saved address.
+6. The customer can edit or select another address.
+7. Address data persists in MongoDB Atlas.
+8. Every order contains an independent delivery-address snapshot.
+9. Editing saved addresses does not modify historical orders.
+10. Orders are created through real backend APIs.
+11. Prices, discounts, shipping charges, and totals are verified server-side.
+12. Inventory is handled safely.
+13. Duplicate order submissions are prevented.
+14. Customer order history works.
+15. Admin Panel order management is synchronized with real database records.
+16. Admin search, filtering, and statistics work correctly.
+17. Authorization and privacy protections are enforced.
+18. Existing payment, cart, and other business logic remain functional.
+19. Mobile and desktop checkout work correctly.
+20. Actual end-to-end tests have been performed.
+
+**FINAL INSTRUCTION: READ THE EXISTING PROJECT FIRST. UNDERSTAND ITS ARCHITECTURE. VERIFY THE REQUIRED NPM PACKAGE. CREATE A SAFE IMPLEMENTATION PLAN. THEN IMPLEMENT THE COMPLETE ORDER LIFECYCLE. TEST THE REAL DATABASE OPERATIONS. DO NOT STOP AFTER BUILDING THE CHECKOUT UI.**
+
+The expected result is a complete, secure, reliable, maintainable, production-oriented e-commerce checkout and order management system.

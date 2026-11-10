@@ -1,0 +1,1091 @@
+# MASTER PROMPT: COMPLETE ADMIN PANEL AUDIT, END-TO-END FUNCTIONAL TESTING, BUG DETECTION & PRODUCTION-GRADE REPAIR
+
+## ROLE & RESPONSIBILITY
+
+Act as a Senior QA Automation Engineer, Full-Stack Software Architect, Backend Engineer, Database Engineer, Security Engineer, and Production Reliability Specialist.
+
+You are assigned to perform a complete end-to-end functional audit, systematic testing, bug detection, and production-grade repair of the existing e-commerce Admin Panel.
+
+This is NOT a request to redesign the Admin Panel or rebuild the application.
+
+Your responsibility is to inspect, understand, test, verify, and repair every existing Admin Panel module individually.
+
+The primary objective is to ensure that every administrative feature genuinely works across:
+
+- Admin Panel Frontend
+- Backend APIs
+- Business Logic
+- Database
+- File and Image Storage
+- Public Website Frontend
+- Authentication and Authorization
+- Related Application Modules
+
+**Do not consider a feature functional just because its interface looks correct or a success notification appears. Verify the actual operation and its persistence.**
+
+---
+
+# PHASE 1: COMPLETE PROJECT UNDERSTANDING BEFORE TESTING
+
+Before modifying any code, thoroughly inspect the entire existing project.
+
+Understand:
+
+1. Frontend architecture.
+2. Backend architecture.
+3. Database architecture.
+4. Admin Panel structure.
+5. Authentication and authorization system.
+6. Existing API endpoints.
+7. Database models and relationships.
+8. File and image upload system.
+9. Existing business logic.
+10. Admin Panel routing.
+11. Public website data-fetching architecture.
+12. Existing validation and error-handling mechanisms.
+13. Existing reusable components and hooks.
+14. Existing state-management architecture.
+15. Existing deployment and environment configuration.
+
+Inspect the actual source code rather than assuming how features work based on their names.
+
+Build a complete inventory of every Admin Panel page, module, submenu, action, form, table, modal, and management feature.
+
+Identify the relationship between each Admin Panel module, its backend API, database model, and public-facing website component.
+
+Do not begin modifying code until you understand the complete implementation of the relevant feature.
+
+# PHASE 2: BUILD A COMPLETE ADMIN PANEL MODULE INVENTORY
+
+Discover every existing Admin Panel module automatically.
+
+At a minimum, inspect the following modules if they exist in the project.
+
+## A. Dashboard
+
+Test:
+
+- Dashboard loading.
+- Total sales.
+- Total orders.
+- Total products.
+- Total customers.
+- Revenue statistics.
+- Recent orders.
+- Recent transactions.
+- Charts and analytics.
+- Date filters.
+- Dynamic data fetching.
+- Loading states.
+- Empty states.
+- Error states.
+
+Verify that dashboard numbers come from real backend/database data rather than hardcoded values.
+
+Check whether statistics remain consistent with actual records.
+
+## B. Hero Slider Management
+
+Test every available operation:
+
+- Create a new hero slider.
+- Upload desktop image.
+- Upload mobile image, if supported.
+- Edit slider title.
+- Edit subtitle.
+- Edit description.
+- Edit button label.
+- Edit destination URL.
+- Change display order.
+- Enable/disable slider.
+- Delete slider.
+- Preview slider.
+- Validate image formats and sizes.
+- Validate required fields.
+- Save and reload.
+- Verify database persistence.
+- Verify public homepage rendering.
+
+Important behavior:
+
+If a slider supports an optional destination URL, clicking the slider should navigate only when a valid destination exists. Otherwise, it must remain non-clickable.
+
+Verify that disabled sliders do not appear publicly.
+
+## C. Promotional Banner Management
+
+Test:
+
+- Create banner.
+- Edit banner.
+- Delete banner.
+- Upload banner image.
+- Change banner title.
+- Change subtitle.
+- Configure destination URL.
+- Configure display position.
+- Configure display order.
+- Enable/disable banner.
+- Set start and end dates, if supported.
+- Verify responsive rendering.
+- Verify public website synchronization.
+
+Ensure banners are not duplicated and outdated banners are not displayed.
+
+## D. Advertisement Management
+
+Inspect the complete existing advertisement module.
+
+Test:
+
+- Create advertisement.
+- Edit advertisement.
+- Delete advertisement.
+- Upload advertisement image.
+- Configure advertisement title.
+- Configure description.
+- Configure destination URL.
+- Enable/disable advertisement.
+- Configure placement.
+- Configure schedule.
+- Configure display priority.
+- Validate campaign dates.
+- Verify active advertisement visibility.
+- Verify inactive advertisement invisibility.
+- Verify public website rendering.
+
+If the project includes impressions, clicks, or analytics, verify that these metrics are recorded and calculated correctly.
+
+Do not invent advertising functionality that does not exist.
+
+## E. Product Management
+
+Test the complete product lifecycle.
+
+### Product Creation
+
+- Create a product.
+- Enter product name.
+- Enter description.
+- Configure price.
+- Configure discount price.
+- Upload primary image.
+- Upload gallery images.
+- Select category.
+- Select subcategory.
+- Configure SKU.
+- Configure stock quantity.
+- Configure product status.
+- Configure featured status.
+- Configure attributes and variants.
+- Configure tags.
+- Configure SEO fields, if supported.
+- Save product.
+
+Verify that all required information is correctly validated and saved.
+
+### Product Updates
+
+Test:
+
+- Update product title.
+- Update description.
+- Update price.
+- Update discount.
+- Replace primary image.
+- Add gallery images.
+- Remove gallery images.
+- Update category.
+- Update SKU.
+- Update inventory.
+- Update product status.
+- Update featured status.
+- Update variants.
+
+Verify that changes are reflected in the database and public website.
+
+### Product Deletion
+
+Verify:
+
+- Product deletion.
+- Related image handling.
+- Order-history integrity.
+- Wishlist/cart references.
+- Related product references.
+- Safe deletion or archival behavior.
+
+Never destroy historical order records or financially important references when deleting a product.
+
+## F. Category and Subcategory Management
+
+Test:
+
+- Create category.
+- Edit category.
+- Delete category.
+- Upload category image/icon.
+- Configure category name.
+- Configure slug.
+- Configure parent category.
+- Configure display order.
+- Enable/disable category.
+- Create subcategory.
+- Update subcategory.
+- Delete subcategory.
+- Validate category relationships.
+
+Verify that products associated with categories remain consistent.
+
+Do not allow invalid parent-child relationships or circular category structures.
+
+Verify public navigation and category pages.
+
+## G. Brand Management (If Available)
+
+Test:
+
+- Create brand.
+- Edit brand.
+- Delete brand.
+- Upload logo.
+- Update brand information.
+- Enable/disable brand.
+- Verify product associations.
+- Verify public rendering.
+
+## H. Inventory and Stock Management
+
+Test:
+
+- Stock creation.
+- Stock updates.
+- Stock reduction.
+- Stock restoration.
+- Low-stock alerts.
+- Out-of-stock behavior.
+- Inventory adjustment.
+- Product variant stock.
+- Inventory history, if supported.
+
+Verify that stock does not become negative through invalid operations.
+
+Test concurrent or repeated updates where applicable.
+
+## I. Order Management
+
+Test:
+
+- View orders.
+- Search orders.
+- Filter orders.
+- View order details.
+- Update order status.
+- Cancel order.
+- Confirm order.
+- Process order.
+- Update shipping status.
+- Update delivery status.
+- View customer information.
+- View order items.
+- View payment information.
+- View shipping address.
+- Verify order totals.
+
+Check the complete order lifecycle.
+
+Verify that changing order status triggers only the intended business operations.
+
+Check inventory synchronization and payment-status consistency.
+
+Never mark an order paid without verified payment evidence.
+
+Never modify historical order totals unexpectedly.
+
+## J. Payment Management
+
+Inspect the complete payment management module.
+
+Test:
+
+- Payment transaction listing.
+- Transaction details.
+- Payment method.
+- Payment status.
+- Gateway transaction references.
+- Payment filtering.
+- Payment search.
+- Refund workflow, if implemented.
+- COD collection status.
+- Payment analytics.
+- Payment/order relationship.
+
+Verify that payment information comes from real backend records.
+
+Do not fake transaction success or refund completion.
+
+Do not modify gateway verification logic unnecessarily.
+
+## K. Customer/User Management
+
+Test:
+
+- Customer listing.
+- Customer details.
+- Search.
+- Filters.
+- Customer status.
+- Account activation/deactivation.
+- Profile updates.
+- Order history.
+- Customer information validation.
+
+Check authorization boundaries.
+
+An admin must not unintentionally expose passwords, authentication tokens, or sensitive user information.
+
+## L. Coupon and Discount Management
+
+Test:
+
+- Create coupon.
+- Update coupon.
+- Delete coupon.
+- Configure discount type.
+- Configure discount amount.
+- Configure usage limits.
+- Configure minimum order amount.
+- Configure expiry date.
+- Configure eligibility.
+- Enable/disable coupon.
+- Apply coupon during checkout.
+- Prevent invalid or expired coupon usage.
+- Prevent unauthorized repeated usage.
+
+Verify discount calculations against backend calculations.
+
+## M. Review and Rating Management
+
+Test:
+
+- Review listing.
+- Review details.
+- Approve review.
+- Reject review.
+- Delete review.
+- Update moderation status.
+- Verify public visibility.
+- Verify rating calculations.
+
+## N. Content and CMS Management
+
+Inspect all available content modules.
+
+Examples:
+
+- Static pages.
+- About page.
+- Contact page.
+- FAQ.
+- Blog posts.
+- Blog categories.
+- Policies.
+- Terms and conditions.
+- Privacy policy.
+- Footer content.
+- Header content.
+- Homepage sections.
+
+For every module, test creation, editing, deletion, status changes, ordering, and public rendering wherever applicable.
+
+## O. Navigation and Menu Management
+
+If the project has dynamic navigation management, test:
+
+- Create menu item.
+- Update menu item.
+- Delete menu item.
+- Reorder menu items.
+- Enable/disable menu items.
+- Create parent menu.
+- Create child menu.
+- Create nested submenu.
+- Change parent relationship.
+- Configure internal/external URL.
+- Validate URLs.
+- Verify public navigation.
+- Verify desktop dropdowns.
+- Verify mobile navigation.
+
+Prevent circular parent-child relationships.
+
+## P. Shipping and Delivery Management
+
+Test:
+
+- Shipping zones.
+- Shipping methods.
+- Delivery charges.
+- Delivery settings.
+- Delivery status.
+- Estimated delivery settings.
+- Area or location configuration.
+- Enable/disable shipping methods.
+
+Verify that checkout calculations use the actual active shipping configuration.
+
+## Q. Settings and Configuration
+
+Inspect all existing settings modules.
+
+Examples:
+
+- General settings.
+- Website information.
+- Logo.
+- Favicon.
+- Contact information.
+- Social links.
+- Currency.
+- Tax.
+- Shipping.
+- Payment settings.
+- Email settings.
+- SEO settings.
+- Homepage configuration.
+
+Verify that settings save correctly, persist after reload, and affect only their intended functionality.
+
+Never expose secret credentials through public endpoints.
+
+## R. Admin Roles and Permissions
+
+If role-based access control exists, test:
+
+- Admin login.
+- Admin logout.
+- Staff login.
+- Role permissions.
+- Module permissions.
+- Create/edit/delete permissions.
+- Unauthorized API access.
+- Session expiration.
+- Protected routes.
+
+Verify permissions on the backend, not only by hiding frontend buttons.
+
+Never weaken authentication or authorization to make a test pass.
+
+---
+
+# PHASE 3: SYSTEMATIC CRUD TESTING FOR EVERY MODULE
+
+This phase is mandatory.
+
+For every existing module, independently test the following operations where applicable:
+
+### CREATE
+
+1. Open the module.
+2. Open the creation form.
+3. Submit valid data.
+4. Verify frontend validation.
+5. Verify the backend API request.
+6. Verify the backend response.
+7. Verify the database record.
+8. Reload the page.
+9. Confirm the newly created record remains visible.
+10. Verify its public-facing effect, if applicable.
+
+### READ
+
+1. Open the listing page.
+2. Verify records load from the backend.
+3. Verify correct field values.
+4. Verify pagination.
+5. Verify search.
+6. Verify filters.
+7. Verify sorting.
+8. Verify individual details.
+
+### UPDATE
+
+1. Open an existing record.
+2. Modify its information.
+3. Submit the update.
+4. Verify backend processing.
+5. Verify database changes.
+6. Reload the page.
+7. Confirm the updated values remain.
+8. Verify public website synchronization.
+
+### DELETE
+
+1. Select a test record.
+2. Execute deletion using the existing UI.
+3. Verify confirmation behavior.
+4. Verify backend deletion or archival.
+5. Verify database state.
+6. Verify the record is no longer displayed where expected.
+7. Verify related data integrity.
+
+### STATUS CHANGES
+
+Test:
+
+- Active.
+- Inactive.
+- Published.
+- Draft.
+- Featured.
+- Disabled.
+- Other existing status options.
+
+Verify that status changes persist after reload and are reflected in the correct frontend locations.
+
+Important: Do not use destructive tests on real customer orders, payments, or production data. Use isolated test records and safe test environments.
+
+---
+
+# PHASE 4: FILE, IMAGE, AND MEDIA UPLOAD TESTING
+
+Test every image/file upload component in the Admin Panel.
+
+Examples:
+
+- Hero slider images.
+- Banner images.
+- Advertisement images.
+- Product images.
+- Gallery images.
+- Category images.
+- Brand logos.
+- Content images.
+- Other uploaded media.
+
+Verify:
+
+1. Valid image upload.
+2. Invalid file rejection.
+3. File-size validation.
+4. MIME type validation.
+5. Storage provider response.
+6. Correct file URL.
+7. Database persistence.
+8. Image preview.
+9. Image replacement.
+10. Image removal.
+11. Reload persistence.
+12. Public image rendering.
+13. Broken image handling.
+
+Verify that uploads use the existing storage architecture.
+
+Do not store temporary local filesystem paths as production image URLs unless the project's deployment architecture explicitly supports persistent local storage.
+
+Do not expose private storage credentials.
+
+Do not delete shared media files that are still referenced by other records.
+
+---
+
+# PHASE 5: BACKEND API AND DATABASE VERIFICATION
+
+For every Admin Panel module, trace the complete operation:
+
+Admin UI → API Request → Backend Route → Authentication → Validation → Controller → Business Logic → Database → API Response → Frontend Update.
+
+Verify:
+
+- Correct HTTP methods.
+- Correct endpoints.
+- Correct request payloads.
+- Correct response formats.
+- Correct validation.
+- Correct authorization.
+- Correct database operations.
+- Correct error handling.
+- Correct status codes.
+- Correct relationships.
+- Correct timestamps.
+- Correct persistence.
+
+Check for:
+
+- API 400 errors.
+- API 401 errors.
+- API 403 errors.
+- API 404 errors.
+- API 409 errors.
+- API 422 errors.
+- API 500 errors.
+- Database connection failures.
+- Missing indexes.
+- Duplicate records.
+- Incorrect queries.
+- Invalid ObjectId handling.
+- Race conditions.
+- Missing validation.
+- Incorrect pagination.
+- Broken image URLs.
+- Silent API failures.
+
+Do not suppress errors merely to make the interface look successful.
+
+Never return a successful API response if the underlying database operation failed.
+
+Verify that every successful mutation actually changes the intended database record.
+
+---
+
+# PHASE 6: ADMIN PANEL TO PUBLIC WEBSITE SYNCHRONIZATION
+
+This is a critical requirement.
+
+Admin Panel changes must correctly affect the public website.
+
+For each content or commerce module, verify the complete data flow.
+
+Examples:
+
+- Create hero slider → verify it appears on the homepage.
+- Update hero slider → verify the updated version appears.
+- Disable hero slider → verify it disappears.
+- Create banner → verify correct placement.
+- Update banner → verify new information appears.
+- Create advertisement → verify configured placement.
+- Update product → verify product details page.
+- Update product price → verify product listing, product details, cart, and checkout use the correct price.
+- Update category → verify category navigation and category pages.
+- Update stock → verify product availability.
+- Update menu → verify public navigation.
+- Update homepage content → verify the homepage.
+- Update shipping settings → verify checkout shipping calculations.
+- Update coupon → verify checkout eligibility and calculation.
+
+Inspect cache invalidation, server-side caching, client-side caching, and stale frontend state.
+
+If the database updates correctly but the public website shows old data, investigate and fix the actual synchronization issue.
+
+Do not introduce unnecessary polling or performance-heavy refresh mechanisms.
+
+---
+
+# PHASE 7: NEGATIVE TESTING AND EDGE CASES
+
+For every important form and action, test invalid and unexpected conditions.
+
+Examples:
+
+- Empty required fields.
+- Invalid email.
+- Invalid URL.
+- Invalid numeric values.
+- Negative prices.
+- Negative inventory.
+- Extremely large values.
+- Invalid image format.
+- Oversized upload.
+- Duplicate SKU.
+- Duplicate slug.
+- Missing record.
+- Deleted related record.
+- Unauthorized user.
+- Expired session.
+- Network interruption.
+- Backend unavailable.
+- Database unavailable.
+- Repeated submission.
+- Rapid status changes.
+- Duplicate API request.
+- Invalid parent-child relationship.
+- Invalid date range.
+
+Verify that the system responds safely and clearly.
+
+Never accept invalid data merely because the frontend allows it.
+
+All critical validation must exist on the backend.
+
+---
+
+# PHASE 8: SECURITY AND PERMISSION AUDIT
+
+Audit the Admin Panel for security vulnerabilities.
+
+Check:
+
+- Authentication bypass.
+- Authorization bypass.
+- IDOR vulnerabilities.
+- Privilege escalation.
+- Unauthorized CRUD operations.
+- Mass assignment.
+- Injection vulnerabilities.
+- XSS.
+- CSRF where applicable.
+- Unsafe file uploads.
+- Insecure direct object access.
+- Sensitive data exposure.
+- Secret leakage.
+- Unsafe URL handling.
+- Missing rate limits.
+- Weak validation.
+
+Test that a normal customer cannot call protected Admin APIs.
+
+Test that restricted staff members cannot perform unauthorized operations.
+
+Do not weaken security controls to make automated tests pass.
+
+---
+
+# PHASE 9: AUTOMATED END-TO-END TESTING
+
+Use the existing testing infrastructure where possible.
+
+If the project already uses Playwright, Cypress, Jest, Vitest, or another framework, inspect and reuse the existing setup.
+
+Do not introduce unnecessary duplicate testing frameworks.
+
+Create automated test coverage for the critical Admin Panel workflows.
+
+Where browser automation is available, test actual UI interactions.
+
+For each module:
+
+1. Navigate to the page.
+2. Open the form.
+3. Enter valid test information.
+4. Submit.
+5. Verify the success state.
+6. Verify the API response.
+7. Verify database persistence.
+8. Reload the page.
+9. Verify the record remains.
+10. Edit the record.
+11. Verify changes persist.
+12. Delete or archive the test record safely.
+13. Verify expected final state.
+
+Use isolated test data and a dedicated test database.
+
+Never run destructive automated tests against production customer data.
+
+Do not use actual payment transactions, real customer accounts, or production deletion operations for automated testing.
+
+For external payment providers, use their official sandbox environments.
+
+For email, SMS, and other external services, use safe test configurations.
+
+If browser automation or an external service is unavailable, clearly report the limitation rather than pretending the test was completed.
+
+---
+
+# PHASE 10: ROOT-CAUSE ANALYSIS BEFORE REPAIR
+
+When a problem is discovered:
+
+Do not immediately modify code.
+
+First investigate:
+
+1. What is failing?
+2. Where is it failing?
+3. Is the issue in the frontend?
+4. Is the API request incorrect?
+5. Is the backend controller incorrect?
+6. Is the business logic incorrect?
+7. Is the database query incorrect?
+8. Is the database schema inconsistent?
+9. Is authentication failing?
+10. Is the issue caused by caching?
+11. Is the storage provider failing?
+12. Is another shared component causing the problem?
+
+Find the actual root cause.
+
+Then identify the smallest safe repair.
+
+Do not apply temporary workarounds that hide the underlying problem.
+
+Do not suppress console errors or API errors.
+
+Do not replace real API operations with mock data.
+
+Do not make a frontend-only fix when the actual problem exists in the backend.
+
+---
+
+# PHASE 11: CONTROLLED PRODUCTION-GRADE REPAIR
+
+Follow this strict repair policy.
+
+## Rule 1: Working Features Must Remain Untouched
+
+If a module or feature passes all relevant tests:
+
+DO NOT MODIFY IT.
+
+Do not refactor it merely to improve code style.
+
+Do not redesign it.
+
+Do not change its existing API contract.
+
+Do not change its existing business logic.
+
+Do not replace its working implementation.
+
+## Rule 2: Repair Only Verified Problems
+
+If a module fails:
+
+- Document the exact failure.
+- Identify the root cause.
+- Inspect dependent components and APIs.
+- Determine the impact of the proposed fix.
+- Implement the smallest compatible correction.
+- Run the affected tests.
+- Run regression tests on dependent modules.
+
+## Rule 3: No Unnecessary Refactoring
+
+Do not rename unrelated files.
+
+Do not restructure the entire project.
+
+Do not change existing routes or URLs without a proven necessity.
+
+Do not replace working components.
+
+Do not modify unrelated database schemas.
+
+Do not introduce unnecessary dependencies.
+
+## Rule 4: Protect Shared Components
+
+Before modifying any shared component, inspect all its usages.
+
+Verify that the change does not break:
+
+- Other Admin Panel pages.
+- Public website pages.
+- Checkout.
+- Product details.
+- Cart.
+- Order management.
+- Other dependent modules.
+
+## Rule 5: Safe Database Changes
+
+Never drop production collections.
+
+Never reset the database.
+
+Never delete existing customer records.
+
+Never delete historical orders or payment transactions.
+
+Never perform destructive schema migrations without a safe migration plan, backup, and rollback strategy.
+
+Preserve existing records and relationships.
+
+## Rule 6: Incremental Implementation
+
+Repair one logical module at a time.
+
+After each repair:
+
+1. Run its targeted tests.
+2. Verify API behavior.
+3. Verify database persistence.
+4. Verify public frontend synchronization.
+5. Run dependent-module regression tests.
+6. Record the result.
+7. Proceed to the next module only after the current repair is stable.
+
+Do not make dozens of unrelated modifications simultaneously.
+
+---
+
+# PHASE 12: PERFORMANCE AND RELIABILITY
+
+Inspect:
+
+- Slow Admin Panel pages.
+- Unnecessary API requests.
+- Duplicate requests.
+- N+1 database queries.
+- Unoptimized image uploads.
+- Missing database indexes.
+- Unnecessary re-renders.
+- Memory leaks.
+- Large data loading.
+- Inefficient pagination.
+- Stale caching.
+- Unhandled asynchronous operations.
+
+Fix performance problems only when they are verified and relevant to the Admin Panel's correct operation.
+
+Preserve existing behavior and avoid unnecessary optimization changes.
+
+---
+
+# PHASE 13: COMPLETE REGRESSION TESTING
+
+After all necessary repairs, test the complete application again.
+
+At minimum, verify:
+
+### Admin Panel
+
+- Login and logout.
+- Dashboard.
+- Hero slider.
+- Banner management.
+- Advertisement management.
+- Product management.
+- Category management.
+- Inventory.
+- Order management.
+- Payment management.
+- Customer management.
+- Coupon management.
+- Review management.
+- CMS.
+- Navigation.
+- Shipping.
+- Settings.
+- Admin roles and permissions.
+- All other discovered modules.
+
+### Public Website
+
+- Homepage.
+- Navigation.
+- Hero slider.
+- Banners.
+- Advertisements.
+- Product listing.
+- Product details.
+- Category pages.
+- Search.
+- Filters.
+- Cart.
+- Wishlist.
+- Checkout.
+- Order history.
+- User profile.
+
+### Backend and Database
+
+- API reliability.
+- CRUD persistence.
+- Authentication.
+- Authorization.
+- Database relationships.
+- Data validation.
+- Error handling.
+- File storage.
+- Transaction safety.
+
+Do not consider the work complete if a repair fixes one module but breaks another.
+
+---
+
+# PHASE 14: FINAL MODULE-BY-MODULE AUDIT REPORT
+
+Produce a comprehensive final report.
+
+Do not provide a vague statement such as "Everything is fixed."
+
+For every discovered module, report:
+
+| Module | Create | Read | Update | Delete | Database | Public Sync | Final Status |
+|---|---|---|---|---|---|---|---|
+
+Use these status labels:
+
+- PASS: Tested successfully.
+- FAIL: A problem remains.
+- FIXED: A verified problem was repaired and retested successfully.
+- BLOCKED: Requires missing credentials, external service access, or unavailable infrastructure.
+- NOT APPLICABLE: Operation does not exist for that module.
+- NOT TESTED: Could not be tested.
+
+Also report:
+
+1. Total modules discovered.
+2. Total modules tested.
+3. Total tests executed.
+4. Total tests passed.
+5. Total tests failed.
+6. Total bugs discovered.
+7. Total bugs fixed.
+8. Remaining unresolved bugs.
+9. Files inspected.
+10. Files modified.
+11. Files created.
+12. Database changes.
+13. API changes.
+14. Security issues found.
+15. Performance issues found.
+16. Regression test results.
+17. External dependencies or credentials required.
+18. Remaining production risks.
+
+For every fixed bug, include:
+
+- Module name.
+- Original problem.
+- Root cause.
+- Files changed.
+- Actual repair.
+- Tests performed.
+- Final result.
+
+Never mark an untested module as PASS.
+
+Never claim database persistence without verifying it.
+
+Never claim public website synchronization without checking the actual frontend result.
+
+---
+
+# FINAL NON-NEGOTIABLE RULES
+
+1. Inspect the entire existing project before making changes.
+2. Discover every Admin Panel module rather than relying only on this prompt's examples.
+3. Test each module individually.
+4. Test real CRUD operations.
+5. Verify backend and database persistence.
+6. Verify public website synchronization.
+7. Identify root causes before fixing bugs.
+8. Leave correctly working modules completely untouched.
+9. Repair only verified problems.
+10. Do not introduce new bugs.
+11. Do not break existing business logic.
+12. Do not unnecessarily modify existing components, functions, APIs, routes, URLs, CSS, or design.
+13. Do not replace real backend functionality with mock data.
+14. Do not fake successful operations.
+15. Do not run destructive tests against production data.
+16. Use isolated test data and safe test environments.
+17. Run regression tests after every meaningful repair.
+18. Report honestly what was tested and what was not.
+
+## THE ULTIMATE OBJECTIVE
+
+I want my existing e-commerce Admin Panel to be thoroughly inspected and tested like a professional production software QA team would test a real-world enterprise e-commerce platform.
+
+Every existing module must be checked one by one.
+
+Every create, update, delete, search, filter, upload, status change, database operation, and frontend synchronization must be verified wherever applicable.
+
+If something is already working correctly, leave it untouched.
+
+If something is broken, understand the complete implementation, identify the root cause, repair it safely, and verify that the repair works without creating new problems elsewhere.
+
+**Do not prioritize making changes. Prioritize correctness, stability, data integrity, security, and production reliability.**
+
+The final result must be a genuinely tested, reliable, fully functional Admin Panel — not merely an Admin Panel that looks functional.

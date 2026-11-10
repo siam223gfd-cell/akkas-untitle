@@ -1,0 +1,1031 @@
+# MASTER PROMPT: ENTERPRISE-GRADE DYNAMIC MULTI-CATEGORY PRODUCT DETAILS PAGE & VARIANT MANAGEMENT SYSTEM
+
+## ROLE & RESPONSIBILITY
+
+Act as a Senior Full-Stack Software Architect, Principal UI/UX Designer, Backend Engineer, Database Architect, E-commerce Specialist, and Security Engineer.
+
+You are working on my EXISTING SINGLE-VENDOR E-COMMERCE PROJECT.
+
+Your task is to analyze, upgrade, and fully implement a production-ready, enterprise-grade, dynamic Product Details Page (PDP) and Product Attribute & Variant Management System.
+
+This is NOT a request to create a frontend-only design, static prototype, demo, or isolated component.
+
+You MUST implement the complete working system across:
+
+1. Customer-facing frontend.
+2. Backend APIs and business logic.
+3. Database schemas and relationships.
+4. Admin dashboard and management interfaces.
+5. Product attribute management.
+6. Product variant management.
+7. Inventory and stock management.
+8. Cart and checkout integration.
+9. Product reviews and ratings.
+10. Search engine optimization.
+11. Validation, security, testing, and error handling.
+
+Every feature must be connected to the real database and existing backend.
+
+---
+
+# PART 1: FIRST AUDIT THE EXISTING PROJECT
+
+Before changing any code, thoroughly inspect the entire existing project.
+
+Identify:
+
+- Frontend framework and architecture.
+- Backend framework and server structure.
+- Database technology and existing schemas.
+- Existing product model.
+- Existing category model.
+- Existing admin authentication and authorization.
+- Existing product creation and editing functionality.
+- Existing product details page.
+- Existing cart and checkout systems.
+- Existing inventory and stock management.
+- Existing image upload/storage solution.
+- Existing API routes and services.
+- Existing design system and reusable components.
+
+IMPORTANT:
+
+- Preserve the existing technology stack.
+- Preserve all existing working functionality.
+- Do not unnecessarily replace existing architecture.
+- Do not create duplicate product models, APIs, or database collections.
+- Reuse existing components, services, authentication, and database connections wherever appropriate.
+- Maintain backward compatibility with existing products and orders.
+- Do not delete existing data.
+- Do not introduce mock data into production functionality.
+
+First understand how the current application works, then implement the required improvements.
+
+Do not stop after the audit. Continue with the complete implementation.
+
+# PART 2: PRODUCT DETAILS PAGE DESIGN
+
+Use my uploaded reference image as the PRIMARY visual design reference.
+
+The reference image represents the Samsung Galaxy S25 Ultra product details page.
+
+Recreate its overall design as closely as possible while improving the visual quality, usability, responsiveness, and professional appearance.
+
+The design should look like a premium international e-commerce platform.
+
+## A. Overall visual direction
+
+Follow these design principles:
+
+- Premium and modern UI.
+- Clean white/light background.
+- Professional navy-blue and royal-blue color palette.
+- Soft shadows and subtle borders.
+- Rounded cards and buttons.
+- Consistent spacing and alignment.
+- High-quality product imagery.
+- Elegant typography.
+- Professional icons.
+- Smooth transitions and micro-interactions.
+- Clear visual hierarchy.
+- Excellent readability.
+- Avoid unnecessary visual clutter.
+
+Do not blindly copy every visual element if it negatively affects usability. Preserve the reference layout and improve it thoughtfully.
+
+## B. Header and navigation
+
+Preserve the existing website header and navigation system.
+
+The Product Details Page should integrate with the existing:
+
+- Announcement bar.
+- Logo.
+- Search bar.
+- Account navigation.
+- Wishlist.
+- Cart.
+- Main navigation.
+- Category navigation.
+- Breadcrumb navigation.
+
+Do not create a second header if the project already has a global header.
+
+## C. Main product information section
+
+Create a professional two-column layout.
+
+LEFT COLUMN — Product Gallery:
+
+- Main product image.
+- Multiple product images.
+- Thumbnail gallery.
+- Click-to-change image.
+- Image zoom functionality.
+- Full-screen image viewer.
+- Previous/next image navigation.
+- Optional product video.
+- Optional 360-degree product images if supported by existing infrastructure.
+- Product badges such as Best Seller, New Arrival, Featured, Limited Stock, and Sale.
+
+RIGHT COLUMN — Product Information:
+
+- Stock availability.
+- Product title.
+- Subtitle or short description.
+- Average rating.
+- Total reviews.
+- Write a Review action.
+- SKU.
+- Brand.
+- Category.
+- Current selling price.
+- Original price.
+- Discount percentage.
+- Product description.
+- Dynamic product attributes.
+- Dynamic variant selectors.
+- Quantity selector.
+- Add to Cart.
+- Buy Now.
+- Add to Wishlist.
+- Compare Products.
+- Estimated delivery.
+- Shipping information.
+- Return policy.
+- Payment security information.
+
+Every field must be populated dynamically from the database.
+
+If optional data is unavailable, intelligently hide the corresponding section instead of showing empty placeholders.
+
+# PART 3: UNIVERSAL DYNAMIC ATTRIBUTE ENGINE
+
+THIS IS THE MOST IMPORTANT REQUIREMENT.
+
+Build a reusable, fully dynamic product attribute system.
+
+The application must support unlimited product categories and custom attributes without requiring code changes whenever a new category or attribute is added.
+
+Examples of supported categories:
+
+Electronics:
+- Smartphones
+- Feature Phones
+- Laptops
+- Desktop Computers
+- Monitors
+- Keyboards
+- Mouse
+- Routers
+- Headphones
+- Speakers
+- Cameras
+- Smartwatches
+
+Fashion:
+- T-Shirts
+- Shirts
+- Jeans
+- Trousers
+- Hoodies
+- Jackets
+- Dresses
+
+Footwear:
+- Shoes
+- Sneakers
+- Sandals
+- Slippers
+- Boots
+
+Additional categories must also be supported.
+
+## A. Dynamic attribute types
+
+The system must support the following attribute input types:
+
+1. Text.
+2. Number.
+3. Dropdown/select.
+4. Multi-select.
+5. Radio buttons.
+6. Color swatches.
+7. Size selector.
+8. Boolean/Yes-No.
+9. Checkbox.
+10. Date, where relevant.
+11. Measurement fields.
+12. Custom values.
+
+The admin must be able to create new attributes and choose their input types.
+
+## B. Category-specific attribute templates
+
+Implement a category-based attribute template system.
+
+Example:
+
+SMARTPHONE:
+
+- RAM: 4GB, 6GB, 8GB, 12GB, 16GB.
+- Storage: 64GB, 128GB, 256GB, 512GB, 1TB.
+- Color: Black, White, Blue, Silver.
+- Processor.
+- Display Size.
+- Battery Capacity.
+- Camera.
+- Network: 4G, 5G.
+
+LAPTOP:
+
+- Processor.
+- RAM.
+- SSD Capacity.
+- HDD Capacity.
+- GPU.
+- Display Size.
+- Display Resolution.
+- Operating System.
+- Color.
+
+T-SHIRT:
+
+- Size: XS, S, M, L, XL, XXL, XXXL.
+- Color.
+- Fabric.
+- Fit.
+- Sleeve Type.
+- Pattern.
+
+JEANS:
+
+- Waist Size.
+- Length.
+- Fit Type.
+- Color.
+- Fabric.
+- Stretch Type.
+
+SHOES:
+
+- EU Size.
+- UK Size.
+- US Size.
+- Color.
+- Material.
+- Shoe Type.
+
+ROUTER:
+
+- Wi-Fi Standard.
+- Frequency.
+- Wireless Speed.
+- Antenna Count.
+- LAN Ports.
+- WAN Ports.
+
+These are example templates, not hardcoded limitations.
+
+The admin must be able to:
+
+- Create unlimited attributes.
+- Rename attributes.
+- Delete attributes when safe.
+- Add and remove attribute values.
+- Reorder attributes.
+- Set attributes as required or optional.
+- Set attributes as filterable or non-filterable.
+- Set attributes as visible or hidden on the product details page.
+- Assign attributes to one or multiple categories.
+- Reuse existing attributes.
+- Create category-specific attribute templates.
+- Override inherited category attributes for individual products.
+- Add product-specific custom attributes.
+
+Support category inheritance where appropriate.
+
+For example:
+
+Electronics → Smartphones → Android Smartphones.
+
+A child category may inherit its parent category's attributes and extend or override them.
+
+Do not force every category to use the same attributes.
+
+# PART 4: ADVANCED PRODUCT VARIANT ENGINE
+
+Build a real-world product variant management system.
+
+Understand the difference between:
+
+- Product Attributes: Characteristics or selectable properties.
+- Product Variants: Actual purchasable combinations of those properties.
+
+Example:
+
+A T-shirt has:
+
+Size: M, L, XL.
+
+Color: Black, White.
+
+The system can generate combinations:
+
+- Black / M.
+- Black / L.
+- Black / XL.
+- White / M.
+- White / L.
+- White / XL.
+
+Each actual purchasable variant must support:
+
+- Unique SKU.
+- Barcode, if available.
+- Variant-specific price.
+- Compare-at/original price.
+- Discount.
+- Stock quantity.
+- Low-stock threshold.
+- Variant-specific image.
+- Variant-specific weight.
+- Variant-specific dimensions.
+- Active/inactive status.
+- Backorder permission, if enabled.
+
+## Variant management requirements
+
+- Automatically generate combinations when requested.
+- Allow the admin to select which combinations actually exist.
+- Allow manual variant creation.
+- Allow individual variant editing.
+- Allow bulk price updates.
+- Allow bulk stock updates.
+- Allow bulk SKU generation.
+- Prevent duplicate SKUs.
+- Prevent duplicate variant combinations within the same product.
+- Support products with no variants.
+- Support products with one or multiple selectable attributes.
+- Support products where some attributes are informational only and do not generate variants.
+- Support different prices and stock quantities for different variants.
+
+IMPORTANT:
+
+Do not automatically create every mathematically possible combination as a purchasable variant.
+
+For example, if a product has three colors and five sizes, the admin must be able to disable unavailable combinations.
+
+Only valid, active combinations should be purchasable.
+
+# PART 5: DYNAMIC PRODUCT DETAILS PAGE RENDERING
+
+The customer-facing Product Details Page must dynamically render its interface based on the product's actual database configuration.
+
+Examples:
+
+SMARTPHONE:
+
+Show:
+- Color selector.
+- RAM selector.
+- Storage selector.
+
+T-SHIRT:
+
+Show:
+- Size selector.
+- Color selector.
+- Fabric information.
+
+SHOES:
+
+Show:
+- Shoe size selector.
+- Color selector.
+
+ROUTER:
+
+Show:
+- Model selector, if applicable.
+- Frequency information.
+- Wi-Fi standard.
+- Other configured selectable options.
+
+LAPTOP:
+
+Show:
+- RAM.
+- Storage.
+- Processor.
+- Other available configurations.
+
+If a product does not have a Size attribute, never display a Size selector.
+
+If a product does not have RAM, never display RAM options.
+
+Do not display irrelevant, empty, undefined, null, or unavailable attributes.
+
+## Variant selection behavior
+
+When customers select different options:
+
+- Update the selected variant immediately.
+- Update the SKU.
+- Update the price.
+- Update the discount.
+- Update stock availability.
+- Update the main product image when the variant has a specific image.
+- Update the availability status.
+- Disable unavailable combinations.
+- Display an appropriate unavailable message.
+- Recalculate the order subtotal when quantity changes.
+
+Never allow customers to purchase a variant that does not exist or is out of stock.
+
+If a variant is not selected but selection is required, clearly inform the customer.
+
+If a product has no selectable variants, use its default product price and stock.
+
+# PART 6: ADMIN DASHBOARD — COMPLETE MANAGEMENT SYSTEM
+
+Build a professional admin management interface integrated into the existing admin dashboard.
+
+Do not create a separate disconnected dashboard.
+
+Add the following management sections.
+
+## A. Product Management
+
+Admin can:
+
+- Create products.
+- Edit products.
+- Delete products safely.
+- Duplicate products.
+- Publish/unpublish products.
+- Mark products as featured.
+- Assign categories and subcategories.
+- Assign brands.
+- Upload multiple images.
+- Set product descriptions.
+- Set product SEO information.
+- Set prices and discounts.
+- Configure shipping information.
+- Configure warranty information.
+- Manage product visibility.
+- Manage related products.
+
+## B. Attribute Management
+
+Create a dedicated Attribute Management section.
+
+Admin can:
+
+- Create attributes.
+- Edit attributes.
+- Delete attributes safely.
+- Create attribute values.
+- Define attribute input types.
+- Define attribute display styles.
+- Set required/optional status.
+- Set filterable status.
+- Assign attributes to categories.
+- Create reusable attribute templates.
+
+## C. Category Attribute Templates
+
+Admin can open a category and configure its attributes.
+
+Example:
+
+Category: T-Shirts
+
+Assigned attributes:
+- Size.
+- Color.
+- Fabric.
+- Fit.
+
+Category: Smartphones
+
+Assigned attributes:
+- RAM.
+- Storage.
+- Color.
+- Processor.
+
+When the admin selects a category in the Add Product form, its configured attributes should load automatically.
+
+When the category changes, update the form dynamically without losing unrelated product information.
+
+Clearly handle unsaved changes and incompatible existing variants.
+
+## D. Variant Management
+
+Create an intuitive variant configuration interface.
+
+Include:
+
+- Attribute selection.
+- Variant combination generation.
+- Combination selection.
+- Bulk editing.
+- Individual variant editing.
+- SKU management.
+- Pricing.
+- Inventory.
+- Variant images.
+- Variant status.
+
+Provide a clean table-based interface for managing large numbers of variants.
+
+Include pagination or virtualization when necessary.
+
+## E. Inventory Management
+
+Inventory must be variant-aware.
+
+Admin can:
+
+- View total stock.
+- View individual variant stock.
+- Increase stock.
+- Decrease stock.
+- Record stock adjustments.
+- View inventory history.
+- Set low-stock thresholds.
+- Identify out-of-stock variants.
+- View stock movement records.
+
+All inventory adjustments must be recorded with timestamps and the responsible admin.
+
+# PART 7: DATABASE ARCHITECTURE
+
+Implement a scalable and maintainable database architecture using the database technology already present in the project.
+
+If the existing project uses MongoDB, follow appropriate Mongoose schema design.
+
+Suggested logical entities:
+
+1. Product.
+2. Category.
+3. Brand.
+4. Attribute.
+5. AttributeValue, if required by the architecture.
+6. CategoryAttributeTemplate.
+7. ProductVariant.
+8. InventoryMovement.
+9. ProductReview.
+10. ProductImage.
+
+These are logical entities. Do not blindly create separate collections if the existing architecture supports a more appropriate normalized or embedded design.
+
+## Product data requirements
+
+Product:
+- Name.
+- Slug.
+- Description.
+- Short description.
+- Category.
+- Brand.
+- Images.
+- Attributes.
+- Variants.
+- Default price.
+- Default stock, where applicable.
+- SKU, where applicable.
+- Status.
+- Featured status.
+- SEO metadata.
+- Shipping information.
+- Warranty.
+- Created timestamp.
+- Updated timestamp.
+
+## Data integrity
+
+Implement:
+
+- Proper database indexes.
+- Unique SKU constraints where appropriate.
+- Unique slug constraints.
+- Referential integrity where applicable.
+- Database-level and application-level validation.
+- Safe deletion rules.
+- Consistent data types.
+- Efficient queries.
+- Pagination.
+- Proper timestamps.
+
+Use transactions for operations that must succeed or fail together, subject to the capabilities of the existing database deployment.
+
+Do not rely on frontend validation alone.
+
+# PART 8: CART, CHECKOUT AND ORDER INTEGRATION
+
+This is a critical requirement.
+
+The dynamic variant system must work with the existing cart, checkout, and order management systems.
+
+When a customer adds a product to the cart, store:
+
+- Product ID.
+- Variant ID, if applicable.
+- Selected attributes/options.
+- SKU.
+- Quantity.
+- Validated unit price.
+- Relevant product image.
+
+The backend must independently verify:
+
+- Product exists.
+- Product is active.
+- Variant exists and is active.
+- Selected options match the actual variant.
+- Requested quantity is valid.
+- Sufficient stock is available.
+- Current price is correct.
+
+Never trust the price, SKU, stock, or variant information sent by the frontend.
+
+Recalculate prices on the server.
+
+At checkout:
+
+- Revalidate all products and variants.
+- Prevent overselling.
+- Reserve or deduct stock according to the existing order lifecycle.
+- Use atomic database operations or transactions where appropriate.
+- Prevent duplicate stock deductions.
+- Restore stock correctly when eligible orders are cancelled.
+- Maintain an accurate inventory history.
+
+Order items must preserve a snapshot of the purchased product information, variant options, SKU, and purchase price.
+
+Future product edits must not change historical order information.
+
+# PART 9: PRODUCT FILTERING AND SEARCH
+
+Build dynamic product filtering based on category attributes.
+
+Examples:
+
+Smartphones:
+- RAM.
+- Storage.
+- Brand.
+- Price.
+- Color.
+
+T-Shirts:
+- Size.
+- Color.
+- Fabric.
+- Price.
+
+Shoes:
+- Size.
+- Brand.
+- Color.
+- Price.
+
+Laptop:
+- Processor.
+- RAM.
+- Storage.
+- GPU.
+
+Filters must be generated from the actual category attribute configuration.
+
+Requirements:
+
+- Dynamic filter generation.
+- Multi-select filters where appropriate.
+- Numeric range filters.
+- Price range.
+- Available stock filtering.
+- Sorting by price.
+- Sorting by popularity.
+- Sorting by newest.
+- Sorting by rating.
+- Search integration.
+- Pagination.
+
+Do not hardcode filter fields separately for each category.
+
+# PART 10: ADDITIONAL PRODUCT DETAILS SECTIONS
+
+Use the reference image as the baseline and add useful sections where appropriate.
+
+## Product highlights
+
+Allow the admin to configure key product highlights.
+
+Examples:
+- 200MP Camera.
+- Snapdragon Processor.
+- 6.8-inch AMOLED Display.
+- 5000mAh Battery.
+
+For a T-shirt, show different highlights:
+- Premium Cotton.
+- Breathable Fabric.
+- Comfortable Fit.
+
+The highlight section must be dynamic and category-independent.
+
+## Product descriptions and specifications
+
+Add:
+
+- Product Description.
+- Technical Specifications.
+- Key Features.
+- What's in the Box.
+- Warranty Information.
+- Shipping and Returns.
+- Frequently Asked Questions.
+
+Use dynamic tab or accordion sections.
+
+Hide empty sections.
+
+## Reviews and Ratings
+
+Implement a real review system:
+
+- Average rating.
+- Total reviews.
+- Rating distribution.
+- Written reviews.
+- Customer images, if supported.
+- Verified purchase badges.
+- Review sorting.
+- Review filtering.
+- Helpful votes.
+- Review submission.
+- Admin moderation.
+
+A verified purchase badge must only appear after server-side verification of an eligible completed purchase.
+
+Do not use fake reviews or fabricated rating statistics.
+
+# PART 11: RELATED PRODUCTS
+
+Build a dynamic related products section.
+
+Show relevant products based on:
+
+- Same category.
+- Related subcategory.
+- Brand.
+- Shared attributes, where appropriate.
+- Admin-selected related products.
+
+Use the existing product data.
+
+Do not hardcode the products shown in the reference image.
+
+# PART 12: RESPONSIVE DESIGN
+
+The page must work perfectly on:
+
+- Desktop.
+- Laptop.
+- Tablet.
+- Mobile.
+
+On desktop, follow the reference image's two-column product layout.
+
+On mobile:
+
+- Stack the gallery and product details vertically.
+- Make option selectors touch-friendly.
+- Keep the primary purchase action easily accessible.
+- Avoid horizontal overflow.
+- Use responsive specifications and review sections.
+- Maintain readable typography.
+- Optimize image dimensions.
+
+Test multiple viewport sizes.
+
+# PART 13: BACKEND API AND SECURITY
+
+Implement proper REST API endpoints or follow the project's existing API conventions.
+
+Required functionality includes:
+
+- Product retrieval by slug or ID.
+- Dynamic attribute retrieval.
+- Category attribute template management.
+- Variant retrieval.
+- Product creation.
+- Product updating.
+- Variant creation and updating.
+- Variant bulk operations.
+- Inventory adjustments.
+- Product reviews.
+- Related products.
+- Dynamic category filtering.
+
+Security requirements:
+
+- Authentication.
+- Role-based authorization.
+- Admin-only management endpoints.
+- Input validation.
+- Sanitization.
+- Rate limiting where appropriate.
+- Secure file upload validation.
+- Protection against unauthorized price changes.
+- Protection against stock manipulation.
+- Protection against invalid variant combinations.
+- Proper error handling.
+- Secure logging.
+
+Never expose sensitive backend information to customers.
+
+# PART 14: PERFORMANCE AND SEO
+
+Implement:
+
+- Optimized image loading.
+- Responsive images.
+- Lazy loading below the fold.
+- Efficient API queries.
+- Database indexing.
+- Appropriate caching.
+- Avoid unnecessary API requests.
+- Avoid unnecessary component re-renders.
+- Skeleton loading.
+- Error states.
+- Empty states.
+
+SEO:
+
+- Dynamic product title.
+- Dynamic meta description.
+- Canonical URL.
+- Open Graph metadata.
+- Product structured data (JSON-LD).
+- Product availability.
+- Valid pricing information.
+- Product image metadata.
+- Breadcrumb structured data.
+
+Do not output invalid or misleading structured data.
+
+# PART 15: ERROR HANDLING AND USER EXPERIENCE
+
+Provide proper UI states for:
+
+- Loading.
+- Product not found.
+- Product unavailable.
+- Out of stock.
+- Variant unavailable.
+- Invalid selection.
+- API failure.
+- Network failure.
+- Successful cart addition.
+- Successful wishlist action.
+- Failed purchase validation.
+
+Use clear customer-friendly messages.
+
+Do not show raw backend errors to customers.
+
+# PART 16: TESTING REQUIREMENTS
+
+Do not consider the task complete merely because the page looks correct.
+
+Test actual functionality.
+
+Required scenarios:
+
+1. Create a smartphone with RAM, Storage, and Color.
+2. Create a T-shirt with Size and Color.
+3. Create shoes with EU, UK, or US size attributes.
+4. Create a new custom attribute from the admin panel.
+5. Assign a custom attribute to a category.
+6. Create a new category and configure its own attributes.
+7. Generate variants.
+8. Disable invalid variant combinations.
+9. Assign different prices to variants.
+10. Assign different stock quantities to variants.
+11. Upload variant-specific images.
+12. Edit existing variants.
+13. Display the correct attributes on the product details page.
+14. Select different variants and verify price changes.
+15. Verify stock availability.
+16. Add a selected variant to the cart.
+17. Refresh the page and verify cart persistence.
+18. Complete checkout validation.
+19. Verify that invalid or out-of-stock variants cannot be purchased.
+20. Verify inventory updates after successful orders.
+21. Verify stock restoration after eligible cancellations.
+22. Verify product filtering.
+23. Verify reviews and verified purchase logic.
+24. Verify responsive layouts.
+25. Verify that existing products and orders still work.
+
+Add automated tests where the existing project supports them.
+
+# PART 17: IMPLEMENTATION RULES
+
+Follow these rules strictly:
+
+1. Work directly inside the existing project.
+2. Do not create a disconnected demo.
+3. Do not replace the entire project unnecessarily.
+4. Do not remove working features.
+5. Do not use hardcoded product-specific attributes.
+6. Do not use fake API responses.
+7. Do not use static product information for dynamic sections.
+8. Do not simulate backend functionality with frontend state.
+9. Do not leave buttons without functional actions.
+10. Do not leave placeholder API endpoints.
+11. Do not introduce duplicate database records unnecessarily.
+12. Do not break existing authentication.
+13. Do not break the existing cart or checkout.
+14. Do not expose environment secrets.
+15. Do not silently swallow errors.
+16. Do not stop after implementing the UI.
+17. Do not stop after creating database schemas.
+18. Complete all frontend, backend, database, and admin integrations.
+
+If you discover existing implementation conflicts, resolve them carefully while preserving backward compatibility.
+
+# PART 18: FINAL ACCEPTANCE CRITERIA
+
+The project will only be considered complete when all the following are true:
+
+- The Product Details Page visually matches the supplied reference design as closely as reasonably possible.
+- The interface looks premium and production-ready.
+- Multiple product categories work with the same reusable PDP architecture.
+- Every category can have its own attributes.
+- Admin can create unlimited custom attributes.
+- Admin can configure category-specific templates.
+- Admin can generate and manage actual purchasable variants.
+- Variant-specific pricing and stock work correctly.
+- Customers see only relevant attributes and options.
+- Variant selections update the page correctly.
+- Cart and checkout receive validated variant information.
+- Inventory remains accurate.
+- Product filtering is dynamic.
+- Reviews are database-backed.
+- Existing website functionality remains intact.
+- The application works on desktop and mobile.
+- Backend validation and security are implemented.
+- No critical errors remain.
+- All relevant tests pass.
+
+## FINAL EXECUTION INSTRUCTION
+
+Do not simply provide me with a development plan, code snippets, architecture suggestions, or a visual mockup.
+
+I want you to IMPLEMENT the complete solution in my existing project.
+
+Start by auditing the existing codebase.
+
+Then proceed step by step:
+
+1. Audit existing architecture.
+2. Design the implementation around the existing stack.
+3. Update database schemas and migrations where necessary.
+4. Implement backend services and APIs.
+5. Implement dynamic admin attribute management.
+6. Implement category templates.
+7. Implement product and variant management.
+8. Implement the customer-facing Product Details Page.
+9. Integrate cart, checkout, and inventory.
+10. Implement dynamic filtering and reviews.
+11. Implement responsive design.
+12. Run tests and fix errors.
+13. Verify the complete end-to-end workflow.
+
+Do not mark a feature complete unless it actually works.
+
+If an external service, credential, or deployment configuration is required, clearly identify it instead of pretending it has been configured.
+
+At the end, provide:
+
+- Summary of completed implementation.
+- Files created or modified.
+- Database schema changes.
+- API endpoints added or modified.
+- Admin features implemented.
+- Frontend features implemented.
+- Tests executed and their actual results.
+- Any remaining issues or external configuration requirements.
+
+MOST IMPORTANT:
+
+Build this as a real-world, scalable, maintainable, secure, full-stack e-commerce product management system — NOT just a beautiful product details page.
+
+The supplied reference image defines the visual direction. The dynamic attribute engine, variant architecture, database integration, admin controls, and complete purchasing workflow define the actual product functionality.
+
+Begin implementation now.

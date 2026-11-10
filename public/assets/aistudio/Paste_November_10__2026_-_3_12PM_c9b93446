@@ -1,0 +1,939 @@
+# MASTER PRODUCTION PROMPT
+# COMPLETE E-COMMERCE HOMEPAGE RESTORATION, DYNAMIC ADMIN CMS, ADVANCED LIVE PRODUCT SEARCH, SECURITY HARDENING, RESPONSIVE UI & PREMIUM RELOAD ANIMATION
+
+Act as a Principal Full-Stack Software Architect, Senior React/TypeScript Engineer, Backend Engineer, Database Architect, Application Security Engineer, SEO Specialist, and QA Automation Engineer.
+
+You are working on an existing production-oriented e-commerce project.
+
+Your mission is to carefully inspect, understand, restore, improve, and implement the required functionality without breaking any existing working features.
+
+This is NOT a request to rebuild the application from scratch.
+
+This is NOT a frontend-only redesign.
+
+This is a complete codebase audit and production-level engineering task.
+
+**MOST IMPORTANT RULE: READ AND UNDERSTAND THE EXISTING CODEBASE BEFORE MAKING ANY CHANGES.**
+
+Do not immediately start coding. First understand the architecture, dependencies, business logic, database schemas, APIs, routes, authentication system, design system, and existing components.
+
+Only after understanding the project should you create an implementation plan and begin modifying the necessary files.
+
+---
+
+# PHASE 1 — COMPLETE PROJECT AUDIT
+
+Inspect the entire project, including:
+
+- Root directory and project structure.
+- Frontend architecture.
+- Backend architecture.
+- React components and hooks.
+- TypeScript interfaces and types.
+- API routes and services.
+- Controllers and middleware.
+- Database models and schemas.
+- MongoDB Atlas connection.
+- Authentication and authorization.
+- Admin Panel modules.
+- Customer-facing pages.
+- Homepage components.
+- Navigation and responsive menu.
+- Product management.
+- Category management.
+- Image upload and storage.
+- Search functionality.
+- SEO implementation.
+- Caching and data-fetching mechanisms.
+- Existing validation and security mechanisms.
+- Environment variables and configuration.
+
+Identify which features are:
+
+1. Fully implemented and working.
+2. Partially implemented.
+3. Only frontend UI without backend integration.
+4. Broken or disconnected.
+5. Completely missing.
+6. Implemented but insecure or unreliable.
+
+Trace the actual data flow instead of guessing.
+
+Do not replace a working implementation just because you prefer a different approach.
+
+Produce an internal technical implementation plan before making code changes.
+
+# PHASE 2 — RESTORE AND IMPROVE THE HOMEPAGE
+
+Currently, important Homepage elements such as the Hero Slider and Product Cards have been removed or are missing.
+
+Restore these elements professionally.
+
+The restored Homepage must match the existing website's brand identity, typography, color palette, spacing, and overall design language.
+
+Do not introduce an unrelated design system.
+
+## 2.1 Hero Slider
+
+Restore a premium, responsive Hero Slider.
+
+Required functionality:
+
+- Dynamic slider images.
+- Dynamic title and description.
+- Optional subtitle.
+- CTA button text.
+- CTA destination URL.
+- Multiple slides.
+- Previous/Next controls.
+- Pagination indicators.
+- Autoplay where appropriate.
+- Smooth transitions.
+- Responsive image handling.
+- Proper image aspect ratios.
+- Accessible controls.
+- Loading and fallback states.
+
+The Hero Slider must retrieve actual published and active records from the backend.
+
+Never hardcode slider content.
+
+## 2.2 Admin-Controlled Hero Slider
+
+Inspect the existing Admin Panel slider module.
+
+If it exists, repair and improve it.
+
+If it does not exist, implement it using the existing architecture.
+
+Administrators must be able to:
+
+- Create sliders.
+- Edit sliders.
+- Delete sliders.
+- Upload images.
+- Preview images.
+- Update titles and descriptions.
+- Configure CTA buttons.
+- Publish and unpublish.
+- Enable and disable.
+- Change display order.
+- Preview the result.
+
+Every operation must persist in MongoDB Atlas.
+
+Homepage visibility must follow the actual database status and business rules.
+
+Deleting or disabling a slider must prevent it from appearing on subsequent valid Homepage data fetches.
+
+Prevent duplicate slider records caused by repeated submissions.
+
+# PHASE 3 — RESTORE PRODUCT CARDS AND HOMEPAGE PRODUCT SECTIONS
+
+Restore the Product Cards and all appropriate Homepage product sections that were removed.
+
+First inspect the existing project to identify which sections were originally intended.
+
+Do not invent unnecessary sections.
+
+Possible sections include:
+
+- Featured Products.
+- Latest Products.
+- New Arrivals.
+- Trending Products.
+- Best Sellers.
+- Popular Products.
+- Discounted Products.
+- Category-based Products.
+- Recommended Products.
+
+Only implement sections that make sense for the existing application.
+
+## 3.1 Premium Product Card Requirements
+
+Each card should correctly display available product information:
+
+- Product image.
+- Product name.
+- Current price.
+- Original price, if discounted.
+- Discount percentage, if supported.
+- Rating and review count, if actual data exists.
+- Availability or stock status.
+- Product badges where applicable.
+- Wishlist action.
+- Add-to-cart action.
+- Product details navigation.
+
+Requirements:
+
+- Consistent card dimensions.
+- Responsive grid.
+- Appropriate image aspect ratios.
+- Smooth but subtle hover interactions.
+- Proper mobile touch behavior.
+- Accessible buttons.
+- Loading skeletons.
+- Empty states.
+- Error states.
+- No layout shifts from image loading.
+
+Do not display fabricated ratings, fake review counts, or invented discounts.
+
+## 3.2 Dynamic Product Management
+
+The Admin Panel must control the products displayed on the Homepage.
+
+Verify and implement:
+
+- Product creation.
+- Product updates.
+- Product deletion.
+- Product activation/deactivation.
+- Publication status.
+- Product category assignment.
+- Product images.
+- Pricing and discount logic.
+- Stock management.
+- Product variants.
+- Featured status.
+- Sorting and ordering.
+- Existing inventory business rules.
+
+A product must appear in the appropriate Homepage section based on its actual attributes and configured rules.
+
+Do not show unpublished, deleted, or ineligible products.
+
+Do not unintentionally duplicate products across sections.
+
+## 3.3 Database Synchronization
+
+Implement and verify the complete flow:
+
+Admin Panel → API → Backend Validation → Business Logic → MongoDB Atlas → Homepage API → Frontend Display.
+
+All displayed product data must come from actual backend responses.
+
+No hardcoded production products.
+
+No mock data as a substitute for real records.
+
+No frontend-only persistence.
+
+Use the existing MongoDB Atlas configuration.
+
+Do not introduce MongoDB Memory Server or an in-memory fallback.
+
+# PHASE 4 — ADVANCED LIVE PRODUCT SEARCH SYSTEM
+
+This is one of the most important requirements.
+
+First audit the current search system.
+
+Determine whether the project already has:
+
+- Basic product search.
+- Live search.
+- Autocomplete.
+- Search suggestions.
+- Search dropdown.
+- Search history.
+- Category-aware search.
+- Backend search endpoints.
+- Search indexing or optimized database queries.
+
+If a reliable system already exists, improve it rather than creating a duplicate.
+
+If it is missing or incomplete, implement a production-quality **Live Product Search with Autocomplete / Typeahead Suggestions**.
+
+The objective is to provide a search experience similar to modern professional e-commerce websites.
+
+## 4.1 Search Interaction
+
+When a customer clicks the search field and starts typing:
+
+1. Capture the search query.
+2. Apply a sensible minimum query length.
+3. Debounce API requests.
+4. Fetch matching products from the backend.
+5. Show relevant results in a professional dropdown.
+6. Update suggestions as the query changes.
+7. Allow users to navigate to a product detail page.
+8. Allow users to view all matching search results.
+
+Example:
+
+Customer types: "iph"
+
+The dropdown may display actual matching products such as:
+
+- iPhone 16
+- iPhone 16 Pro
+- iPhone 16 Pro Max
+- iPhone-compatible accessories
+
+These are examples only. Display actual matching records from the database, not fabricated entries.
+
+## 4.2 Search Dropdown UI
+
+Create a premium, compact, responsive dropdown.
+
+Each suggestion may contain:
+
+- Product thumbnail.
+- Product name.
+- Price.
+- Discounted price, if applicable.
+- Category.
+- Stock availability, where relevant.
+
+Additional requirements:
+
+- Highlight matching query text.
+- Show a loading indicator.
+- Show a clear empty state.
+- Show a helpful error state.
+- Support mouse interaction.
+- Support keyboard navigation.
+- Support Enter to open a selected result.
+- Support Escape to close the dropdown.
+- Close when clicking outside.
+- Prevent dropdown overflow.
+- Position correctly on mobile.
+- Avoid blocking important navigation controls.
+
+The search field must remain easy to use on desktop and small devices.
+
+## 4.3 Search Relevance and Ranking
+
+Implement meaningful product relevance.
+
+Prioritize exact and highly relevant matches.
+
+Suggested ranking:
+
+1. Exact product name.
+2. Product name prefix match.
+3. Product name partial match.
+4. Brand match.
+5. Category match.
+6. SKU or product identifier match, if supported.
+7. Relevant product description match.
+
+Do not return unrelated products just because one common character matches.
+
+Use safe, normalized query processing.
+
+Case-insensitive search should work correctly.
+
+Handle extra spaces and reasonable input variations.
+
+Do not construct unsafe database regular expressions directly from raw user input.
+
+Escape user-provided search input where regex is used.
+
+Use appropriate MongoDB indexes or the project's existing search infrastructure.
+
+If MongoDB Atlas Search is already configured, evaluate whether it is appropriate before introducing another search solution.
+
+Do not add expensive infrastructure without justification.
+
+## 4.4 Search Backend and API
+
+Create or improve the necessary backend search endpoint using existing route conventions.
+
+The implementation must support:
+
+- Query validation.
+- Search result limits.
+- Pagination where appropriate.
+- Safe sorting.
+- Category filtering where supported.
+- Brand filtering where supported.
+- Availability filtering where supported.
+- Efficient database queries.
+- Proper error handling.
+
+Never expose unpublished or unauthorized product information through public search.
+
+## 4.5 Search Performance
+
+Implement:
+
+- Debouncing.
+- Request cancellation or stale-response protection.
+- Query caching where appropriate.
+- Proper indexes.
+- Result limits.
+- Efficient projections.
+- Duplicate request prevention.
+
+A previous slow request must never overwrite newer search results.
+
+Do not request the entire product database on every keystroke.
+
+## 4.6 Full Search Results Page
+
+If the project already has a search results page, repair and integrate it.
+
+Otherwise, implement a search results page consistent with the existing design.
+
+It should support:
+
+- Search query display.
+- Matching product grid.
+- Sorting.
+- Relevant filters.
+- Pagination or load more.
+- Empty results.
+- Loading and error states.
+
+Preserve existing product detail URLs and navigation behavior.
+
+# PHASE 5 — ADMIN PANEL MANAGEMENT QUALITY
+
+Audit all related Admin Panel functionality.
+
+The administrator must have reliable control over:
+
+- Hero Sliders.
+- Products.
+- Product categories.
+- Product visibility.
+- Featured products.
+- Product sorting.
+- Images and galleries.
+- Relevant Homepage sections.
+
+For every management module, verify:
+
+- Create works.
+- Read/list works.
+- Update works.
+- Delete works.
+- Validation works.
+- Authorization works.
+- Database persistence works.
+- Success and failure notifications are accurate.
+- Data refresh works.
+
+Do not show a success message before the backend confirms a successful operation.
+
+Use confirmation dialogs for destructive operations where appropriate.
+
+Avoid unnecessary changes to unrelated Admin Panel modules.
+
+# PHASE 6 — HIGH-LEVEL SCHEMA VALIDATION
+
+Audit all relevant frontend and backend schemas.
+
+Use the project's existing validation library where possible.
+
+If a suitable validation system exists, extend it instead of introducing unnecessary dependencies.
+
+Validate:
+
+## Product validation
+
+- Product name.
+- Slug.
+- Description.
+- Price.
+- Sale price.
+- Stock.
+- Category references.
+- Images.
+- Variants.
+- SKU.
+- Status.
+- Publication state.
+- Other existing product fields.
+
+## Hero Slider validation
+
+- Title.
+- Description.
+- Image.
+- CTA text.
+- CTA URL.
+- Display order.
+- Active status.
+- Publication status.
+
+## Search validation
+
+- Query length.
+- Allowed input length.
+- Pagination values.
+- Sort fields.
+- Filter values.
+
+Requirements:
+
+- Reject malformed input.
+- Prevent invalid references.
+- Prevent negative or impossible prices.
+- Ensure sale-price rules are valid.
+- Validate image URLs or uploaded file metadata appropriately.
+- Sanitize user-controlled content where needed.
+- Prevent mass assignment.
+- Do not trust frontend validation alone.
+
+Backend validation is mandatory.
+
+# PHASE 7 — BUSINESS LOGIC AUDIT
+
+Audit the actual business logic for products, sliders, search, and Homepage content.
+
+Verify:
+
+- Published versus unpublished behavior.
+- Active versus inactive behavior.
+- Stock availability.
+- Discount calculations.
+- Category relationships.
+- Product visibility.
+- Featured product rules.
+- Sorting and ordering.
+- Product deletion behavior.
+- Cart integration.
+- Wishlist integration.
+- Search result visibility.
+
+Do not duplicate business logic in multiple places unnecessarily.
+
+Keep important business rules in the appropriate backend services or existing domain layer.
+
+Ensure the same product cannot have contradictory visibility states due to inconsistent logic.
+
+# PHASE 8 — HIGH-SECURITY APPLICATION AUDIT
+
+Perform a security review of the relevant application layers.
+
+## Authentication and Authorization
+
+- Verify admin-only endpoints.
+- Verify user permissions.
+- Prevent unauthorized content modification.
+- Prevent privilege escalation.
+- Ensure public users cannot assign themselves admin roles.
+- Validate ownership for user-specific actions.
+
+## API Security
+
+- Validate and sanitize incoming input.
+- Protect against NoSQL injection.
+- Apply appropriate rate limits.
+- Use safe error responses.
+- Avoid exposing stack traces in production.
+- Avoid leaking internal database information.
+- Restrict CORS appropriately.
+- Validate uploaded files.
+- Apply upload size and type restrictions.
+- Prevent unsafe URL handling.
+- Prevent mass assignment.
+- Ensure secrets never enter frontend bundles.
+
+## Session and Cookie Security
+
+Inspect the existing authentication mechanism.
+
+Where cookie-based authentication is used, verify appropriate:
+
+- HttpOnly.
+- Secure in production.
+- SameSite.
+- CSRF protections where required.
+- Session expiration.
+- Session invalidation.
+
+Do not blindly replace a working authentication architecture.
+
+## Security Regression
+
+Ensure security improvements do not break legitimate customer and administrator workflows.
+
+Do not claim a system is completely secure. Report actual findings, fixes, and remaining risks.
+
+# PHASE 9 — SEO AND DISCOVERABILITY
+
+Audit and improve SEO for the restored Homepage and product pages.
+
+Verify:
+
+- Unique page titles.
+- Meta descriptions.
+- Canonical URLs.
+- Open Graph metadata.
+- Twitter metadata where appropriate.
+- Semantic HTML.
+- Proper heading hierarchy.
+- Image alt text.
+- Product page metadata.
+- Product structured data where eligible.
+- Breadcrumb structured data where appropriate.
+- Sitemap compatibility.
+- Robots directives.
+- Crawlable product links.
+
+Use actual product information for structured data.
+
+Never invent prices, ratings, availability, or review counts.
+
+Ensure private Admin Panel pages and sensitive endpoints are not exposed to search engines.
+
+Avoid duplicate canonical URLs.
+
+Do not make SEO metadata dependent solely on client-side rendering if the existing rendering architecture requires server-rendered or pre-rendered metadata.
+
+# PHASE 10 — RESPONSIVE NAVIGATION AND SMALL-DEVICE AUDIT
+
+Inspect the complete navigation system.
+
+Test actual behavior on:
+
+- Large desktop.
+- Laptop.
+- Tablet.
+- Small mobile.
+- Very narrow mobile screens.
+
+Verify:
+
+- Logo visibility.
+- Search visibility and usability.
+- Account icon.
+- Cart icon.
+- Wishlist icon.
+- Navigation links.
+- Mobile menu toggle.
+- Menu open and close behavior.
+- Dropdown positioning.
+- Scroll behavior.
+- Touch interactions.
+- Active route indication.
+
+On small devices:
+
+- No navigation elements should disappear unintentionally.
+- No horizontal overflow.
+- No overlapping icons.
+- No clipped menus.
+- No inaccessible dropdowns.
+- No hidden navigation links without an alternative.
+- No broken search field.
+- No menu that cannot be closed.
+- No layout shifts caused by opening or closing navigation.
+
+If the current mobile navigation is broken, fix it using the existing design language.
+
+Preserve all existing navigation destinations and route behavior.
+
+Do not unnecessarily redesign desktop navigation.
+
+# PHASE 11 — PREMIUM 3-SECOND WINDOW RELOAD ANIMATION
+
+Implement a professional reload animation that matches the website's existing brand identity.
+
+First inspect:
+
+- Existing loading animations.
+- Brand logo and identity.
+- Color palette.
+- Typography.
+- Homepage design.
+- Existing route-loading behavior.
+- Application initialization flow.
+
+Then create a premium full-page loading/reload animation.
+
+## Required behavior
+
+When the browser performs a full page reload:
+
+- Show a professionally designed loading animation.
+- Total animation duration should be approximately 3 seconds.
+- Use the website's existing brand identity.
+- Use subtle, polished motion.
+- Keep the animation visually consistent with the Homepage.
+- Avoid generic or unrelated animations.
+
+Possible visual elements:
+
+- Brand logo reveal.
+- Smooth logo scaling or opacity transition.
+- Elegant animated loading indicator.
+- Subtle progress motion.
+- Carefully designed background.
+- Smooth exit transition.
+
+These are design suggestions, not mandatory elements.
+
+Use the best design that fits the actual project.
+
+## Technical requirements
+
+1. The animation must work on a real browser reload.
+2. It must not trigger repeatedly on every React component render.
+3. It must not trigger on every internal SPA route change unless explicitly required by the existing routing design.
+4. Avoid duplicate animation instances.
+5. Prevent hydration mismatch.
+6. Avoid unnecessary layout shifts.
+7. Ensure proper cleanup.
+8. Respect the user's reduced-motion preference.
+9. Do not block essential application initialization.
+10. Do not leave an invisible overlay intercepting clicks.
+11. Do not cause infinite loading.
+12. Do not display the animation indefinitely when the API fails.
+
+Implement the requested approximately 3-second presentation without creating unnecessary delays in application functionality.
+
+If the app becomes ready before the animation ends, keep the presentation smooth while ensuring the application remains stable and responsive.
+
+Do not add a heavy animation library if CSS or the existing animation library is sufficient.
+
+# PHASE 12 — PERFORMANCE OPTIMIZATION
+
+Audit:
+
+- Component rendering.
+- Unnecessary re-renders.
+- API request frequency.
+- Search request performance.
+- Database query efficiency.
+- Image loading.
+- Bundle size.
+- Lazy loading.
+- Code splitting.
+- Caching.
+- Homepage loading performance.
+
+Implement improvements only where justified.
+
+Avoid premature optimization and unnecessary dependencies.
+
+Do not compromise functionality or data correctness for superficial speed improvements.
+
+# PHASE 13 — TESTING AND QUALITY ASSURANCE
+
+Use the project's existing testing infrastructure.
+
+Create or update tests where necessary.
+
+## Hero Slider tests
+
+- Create.
+- Update.
+- Delete.
+- Activate.
+- Deactivate.
+- Publish.
+- Unpublish.
+- Sorting.
+- Homepage display.
+
+## Product tests
+
+- Create.
+- Update.
+- Delete.
+- Publish.
+- Unpublish.
+- Stock changes.
+- Category changes.
+- Product visibility.
+- Homepage display.
+- Product detail navigation.
+
+## Search tests
+
+- Exact search.
+- Partial search.
+- Case-insensitive search.
+- Empty query.
+- Invalid query.
+- No results.
+- Special characters.
+- Rapid typing.
+- Out-of-order API responses.
+- Dropdown interaction.
+- Keyboard navigation.
+- Mobile search.
+- Search results page.
+- Unauthorized or unpublished product visibility.
+
+## Responsive tests
+
+- Desktop.
+- Tablet.
+- Mobile.
+- Very narrow screen.
+- Navigation interactions.
+- Search dropdown positioning.
+- Product card layout.
+- Hero Slider layout.
+
+## Security tests
+
+- Unauthorized admin requests.
+- Invalid payloads.
+- NoSQL injection attempts.
+- Invalid product references.
+- Unsafe file uploads.
+- Rate limiting.
+- Public access to private content.
+- Mass-assignment attempts.
+
+## Reload animation tests
+
+- Browser full reload.
+- Internal SPA navigation.
+- Slow API response.
+- API failure.
+- Reduced-motion preference.
+- Repeated reload.
+- Overlay removal.
+- Interaction after animation.
+
+Run the actual tests and report the results.
+
+Do not claim that something works simply because code was written.
+
+# PHASE 14 — STRICT NON-REGRESSION REQUIREMENTS
+
+This is an existing project.
+
+Protect all unrelated functionality.
+
+DO NOT:
+
+- Rebuild the entire application.
+- Replace the existing architecture unnecessarily.
+- Delete working components.
+- Rename routes without necessity.
+- Change unrelated URLs.
+- Break existing APIs.
+- Replace real backend functionality with mock data.
+- Introduce fake products.
+- Introduce fake ratings.
+- Replace MongoDB Atlas with another database.
+- Add unnecessary packages.
+- Expose secrets.
+- Rewrite unrelated Admin Panel modules.
+- Change the entire visual identity.
+- Remove existing cart, wishlist, account, checkout, or authentication functionality.
+- Modify unrelated business logic.
+
+Before editing a shared component, identify every page or module that depends on it.
+
+Use minimal, targeted, backward-compatible changes.
+
+If a requested change conflicts with an existing business rule, inspect the actual implementation and choose the safest compatible solution.
+
+# PHASE 15 — FINAL VERIFICATION AND ENGINEERING REPORT
+
+After implementation, provide a comprehensive report.
+
+## A. Initial audit
+
+Explain:
+
+- Which components were missing.
+- Which components were broken.
+- Which backend integrations were incomplete.
+- Whether the existing search system was functional.
+- Whether the mobile navigation had issues.
+- Whether validation and security had gaps.
+
+## B. Implementation report
+
+List:
+
+- Files created.
+- Files modified.
+- Components restored.
+- APIs implemented or fixed.
+- Database models or schemas changed.
+- Validation changes.
+- Security improvements.
+- SEO improvements.
+- Responsive fixes.
+- Search improvements.
+- Reload animation implementation.
+
+## C. Test results
+
+Use these exact statuses:
+
+- PASS — Actually tested and working.
+- FAIL — Tested and not working.
+- BLOCKED — Requires unavailable credentials, configuration, or dependencies.
+- NOT TESTED — Not executed.
+
+## D. Database verification
+
+Confirm that real MongoDB Atlas operations were verified where possible.
+
+## E. Security findings
+
+List actual vulnerabilities found and the corresponding fixes.
+
+Do not claim complete security certification.
+
+## F. Regression report
+
+Confirm whether existing routes, components, APIs, cart, wishlist, authentication, checkout, and Admin Panel functionality remain operational.
+
+## G. Remaining work
+
+Clearly identify any incomplete task or external configuration requirement.
+
+---
+
+# FINAL ACCEPTANCE CRITERIA
+
+The project will be considered complete only when:
+
+1. Hero Slider is restored and visually consistent with the website.
+2. Product Cards and appropriate Homepage sections are restored.
+3. Admin Panel provides functional CRUD for sliders and products.
+4. All changes persist in MongoDB Atlas.
+5. Homepage displays actual eligible database records.
+6. Live product search provides relevant dropdown suggestions.
+7. Search results are accurate, secure, and performant.
+8. Search works across desktop and mobile.
+9. Backend schema validation is enforced.
+10. Business logic is consistent.
+11. Security improvements are implemented and tested.
+12. SEO is correctly configured for public pages.
+13. Mobile navigation works correctly.
+14. Browser reload displays the requested premium approximately 3-second animation.
+15. No unrelated functionality, URLs, or components are broken.
+16. Actual tests have been executed.
+17. All unverified functionality is honestly reported.
+
+# FINAL EXECUTION INSTRUCTION
+
+Work in the following order:
+
+1. Inspect the complete repository.
+2. Understand the existing architecture.
+3. Identify missing and broken functionality.
+4. Prepare a technical implementation plan.
+5. Restore Homepage components.
+6. Implement Admin Panel CRUD and backend synchronization.
+7. Audit and implement live product search.
+8. Implement schema validation and business logic fixes.
+9. Perform security and SEO audits.
+10. Fix responsive navigation.
+11. Implement the premium reload animation.
+12. Run tests and verify real database behavior.
+13. Perform a final regression audit.
+14. Deliver the engineering report.
+
+**DO NOT RUSH. DO NOT GUESS. DO NOT MAKE UNNECESSARY CHANGES.**
+
+Read first. Understand first. Plan first. Then implement carefully.
+
+The goal is a genuinely functional, secure, maintainable, premium-quality production e-commerce application — not merely a visually attractive frontend.

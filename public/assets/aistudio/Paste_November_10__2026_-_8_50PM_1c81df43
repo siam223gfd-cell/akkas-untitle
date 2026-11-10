@@ -1,0 +1,845 @@
+# MASTER PRODUCTION PROMPT
+## Complete Real-World Payment Gateway Integration, Verification, Transaction Processing & Admin Payment Management
+
+You are now acting as a Senior FinTech Payment Infrastructure Engineer, Payment Gateway Integration Specialist, Backend Architect, Database Engineer, Security Engineer, and Full-Stack E-commerce Developer.
+
+Your task is to perform a complete, production-grade audit, repair, and implementation of the existing payment system in this e-commerce project.
+
+**IMPORTANT: This is an existing, working e-commerce application. Do not rebuild the application, redesign the website, or modify unrelated functionality.**
+
+The current problem is that the payment interface displays a successful payment message on the frontend without completing genuine payment processing through the backend and an authorized payment provider.
+
+This behavior must be eliminated.
+
+I need a real-world payment infrastructure where payments are initiated, processed, verified, recorded, and reconciled through actual authorized payment gateways.
+
+The payment system must work correctly across:
+
+1. Cash on Delivery (COD)
+2. bKash
+3. Nagad
+4. Debit Card
+5. Credit Card
+
+All payment methods must be integrated with the existing checkout, order management, backend APIs, database, and Admin Panel.
+
+---
+
+# PHASE 1: COMPLETE PROJECT AUDIT — BEFORE WRITING CODE
+
+Before modifying anything, thoroughly inspect the entire existing project.
+
+Understand the current architecture and identify:
+
+- Frontend framework and existing payment components.
+- Checkout page and checkout submission flow.
+- Existing payment method selection interface.
+- Existing order creation process.
+- Backend payment controllers and services.
+- Existing payment APIs and routes.
+- Order models and database schemas.
+- Payment and transaction models.
+- User authentication and authorization.
+- Admin Panel payment and order management modules.
+- Existing payment gateway integrations, if any.
+- Environment variable configuration.
+- Existing error handling and validation.
+- Webhook and callback handling.
+- Existing database relationships.
+- Existing order and payment status logic.
+
+Inspect the complete payment lifecycle from the moment a customer clicks the Place Order / Pay Now button until the final order and payment status are recorded.
+
+Identify exactly why the current implementation displays frontend-only success.
+
+Do not assume existing payment integrations are functional simply because their UI exists.
+
+Prepare an internal technical implementation plan before making changes.
+
+**Strict rule:** Do not begin implementation until you understand how the existing application handles checkout, orders, payments, and database persistence.
+
+# PHASE 2: PAYMENT ARCHITECTURE
+
+Implement a secure server-side payment architecture.
+
+The architecture must follow this principle:
+
+Customer Frontend → Backend Payment API → Authorized Payment Gateway → Gateway Verification / Callback → Backend Verification → Database Transaction Update → Order Status Update → Frontend Result.
+
+The frontend must never independently determine whether a payment was successful.
+
+The backend must be the authoritative source of payment status.
+
+Implement a centralized payment service compatible with the existing project architecture.
+
+Use separate provider adapters or equivalent modular services for:
+
+- bKash
+- Nagad
+- Debit/Credit Card Gateway
+- Cash on Delivery
+
+Do not create duplicate payment logic across multiple frontend components.
+
+The existing payment architecture should remain maintainable, extensible, and production-ready.
+
+# PHASE 3: REAL bKASH PAYMENT INTEGRATION
+
+Implement genuine bKash Merchant Payment Gateway integration using the officially supported merchant API and the appropriate merchant credentials.
+
+Do not create a fake bKash payment simulation.
+
+Expected real-world payment lifecycle:
+
+1. Customer selects bKash at checkout.
+2. Frontend submits the checkout information to the backend.
+3. Backend validates the customer, cart, product availability, pricing, shipping cost, discount, and final payable amount.
+4. Backend creates a pending order or payment intent using a unique internal reference.
+5. Backend securely authenticates with the official bKash API using server-side credentials.
+6. Backend requests a payment session through the official API.
+7. Customer is redirected to the official bKash payment interface or the officially supported checkout experience.
+8. Customer completes the actual payment through bKash.
+9. The gateway returns the customer to the configured callback/return URL.
+10. Backend independently verifies the transaction using the official bKash execution and payment-query mechanisms, according to the merchant API version.
+11. Backend verifies the transaction ID, payment status, merchant reference, amount, currency, and order association.
+12. Only after successful server-side verification may the payment be marked PAID.
+13. The verified transaction is permanently recorded in the database.
+14. The corresponding order is updated to the correct confirmed/processing state.
+15. The customer receives a genuine payment confirmation.
+
+Security requirements:
+
+- Never trust frontend success parameters.
+- Never accept a payment status sent only by the browser.
+- Never expose bKash secrets or access tokens to the frontend.
+- Never mark an order paid merely because the customer returned to the success URL.
+- Verify every transaction with the official gateway API.
+- Prevent duplicate execution and duplicate transaction processing.
+- Handle expired sessions, cancelled payments, failed payments, and gateway timeouts.
+- Support secure token lifecycle and refresh behavior according to official API documentation.
+
+# PHASE 4: REAL NAGAD PAYMENT INTEGRATION
+
+Implement genuine Nagad Merchant Payment Gateway integration using the official merchant integration documentation and authorized credentials.
+
+Expected lifecycle:
+
+1. Customer selects Nagad.
+2. Frontend sends checkout data to the backend.
+3. Backend validates the complete order and calculates the payable amount independently.
+4. Backend creates a pending payment record.
+5. Backend initiates the payment through the official Nagad merchant API.
+6. Customer is redirected to the official Nagad payment interface.
+7. Customer completes payment using the authorized Nagad payment flow.
+8. Nagad returns the customer through the configured callback mechanism.
+9. Backend verifies the payment through the official Nagad verification process.
+10. Backend validates transaction identifiers, merchant references, amount, currency, and payment status.
+11. Backend records the verified payment.
+12. Backend updates the order only after successful verification.
+13. Frontend displays the actual verified result.
+
+Implement all official cryptographic requirements, request signatures, encrypted payloads, response verification, and callback validation required by the specific Nagad merchant API version.
+
+Do not invent Nagad API endpoints, signatures, encryption procedures, or undocumented request formats.
+
+Use the official integration documentation for the merchant account being configured.
+
+Never treat an unverified redirect as proof of payment.
+
+# PHASE 5: REAL DEBIT CARD AND CREDIT CARD PAYMENT
+
+Implement actual Debit Card and Credit Card payment processing through an authorized, PCI-compliant payment gateway available to the merchant.
+
+Prefer an officially supported Bangladesh-compatible payment gateway such as:
+
+- SSLCOMMERZ
+- aamarPay
+- ShurjoPay
+
+First inspect the existing project and merchant requirements to select the most appropriate supported gateway.
+
+If an existing card gateway integration is already configured and valid, repair and reuse it rather than introducing an unnecessary replacement.
+
+Expected payment lifecycle:
+
+1. Customer selects Debit/Credit Card.
+2. Backend independently calculates and validates the final amount.
+3. Backend creates a pending payment record.
+4. Backend creates a payment session using the authorized gateway's server-side API.
+5. Customer is redirected to the gateway's secure hosted checkout page or an officially supported secure payment component.
+6. Customer enters card details directly into the gateway-controlled payment interface.
+7. The gateway processes the actual card transaction through its acquiring/payment network.
+8. The gateway sends the result through its official callback or notification mechanism.
+9. Backend performs mandatory server-to-server transaction validation.
+10. Backend verifies transaction ID, order reference, amount, currency, merchant identity, and transaction status.
+11. Backend records the verified result.
+12. The order is confirmed only when payment verification succeeds.
+
+Critical PCI and security requirements:
+
+- Never store complete card numbers.
+- Never store CVV/CVC.
+- Never collect raw card details in ordinary application forms.
+- Never log sensitive card information.
+- Never expose gateway secret keys.
+- Use hosted checkout or gateway-approved tokenized components.
+- Follow applicable PCI DSS requirements and gateway security rules.
+- Use HTTPS for all payment communication.
+- Use gateway-supported authentication such as 3-D Secure when applicable.
+- Do not claim PCI compliance merely because hosted checkout is used; follow the gateway's applicable compliance and integration requirements.
+
+# PHASE 6: CASH ON DELIVERY — REAL-WORLD ORDER LIFECYCLE
+
+Cash on Delivery is fundamentally different from online payment.
+
+Do not incorrectly mark a COD order as PAID immediately after checkout.
+
+Expected COD lifecycle:
+
+1. Customer selects Cash on Delivery.
+2. Backend validates the customer's cart and checkout information.
+3. Backend calculates the actual order total.
+4. Backend creates the order with:
+   - Payment Method: COD
+   - Payment Status: UNPAID / PENDING_COLLECTION
+   - Order Status: PENDING_CONFIRMATION or the appropriate existing status.
+5. Customer receives an order confirmation.
+6. Admin can review and process the COD order.
+7. Order moves through the existing fulfillment and delivery workflow.
+8. The delivery person collects the actual payment from the customer.
+9. Only after confirmed collection may the payment status become PAID / COLLECTED.
+10. The collection event must be recorded with timestamp, amount, order reference, and authorized operator/delivery confirmation.
+11. Admin can see the actual collection status.
+
+Important:
+
+- COD order placement does not mean money has been collected.
+- Do not show a fake online payment success message for COD.
+- Do not mark COD as paid during checkout.
+- Support COD cancellation, failed delivery, return, and collection failure using the existing order lifecycle.
+- If the application has no delivery collection confirmation feature, implement a secure minimal workflow inside the existing Admin/Delivery management architecture without redesigning unrelated modules.
+
+# PHASE 7: PAYMENT STATUS AND ORDER STATUS MANAGEMENT
+
+Implement a consistent payment state machine.
+
+Use the existing project's naming conventions where possible. Do not unnecessarily break existing status values or APIs.
+
+Recommended payment statuses:
+
+- INITIATED
+- PENDING
+- PROCESSING
+- AUTHORIZED
+- PAID
+- FAILED
+- CANCELLED
+- EXPIRED
+- REFUND_PENDING
+- PARTIALLY_REFUNDED
+- REFUNDED
+- UNPAID
+- PENDING_COLLECTION
+- COLLECTION_FAILED
+
+Use only statuses appropriate to the gateway and actual transaction lifecycle.
+
+Keep payment status separate from order fulfillment status.
+
+Recommended order lifecycle:
+
+- PENDING
+- CONFIRMED
+- PROCESSING
+- PACKED
+- SHIPPED
+- OUT_FOR_DELIVERY
+- DELIVERED
+- COMPLETED
+- CANCELLED
+- RETURNED
+
+Adapt these to the existing project rather than blindly replacing its current order state machine.
+
+Critical rules:
+
+1. Payment success does not automatically mean the order has been delivered or completed.
+2. Online payment success may move the order into CONFIRMED or PROCESSING.
+3. COD orders remain unpaid until actual collection.
+4. Failed online payments must never be treated as paid.
+5. Cancelled payments must never be treated as successful.
+6. A customer returning to a success URL must not independently change order status.
+7. A customer must never be able to update payment status through a public API.
+8. Admin users must not be able to arbitrarily forge gateway verification results.
+
+# PHASE 8: BACKEND PAYMENT VERIFICATION AND SECURITY
+
+This phase is mandatory.
+
+Implement:
+
+### A. Server-side amount verification
+
+Never trust:
+
+- Frontend total amount.
+- Frontend discount.
+- Frontend shipping cost.
+- Frontend tax.
+- Frontend product price.
+- Frontend payment status.
+
+Recalculate the payable amount from trusted database records.
+
+Validate:
+
+- Product price.
+- Product availability.
+- Product quantity.
+- Inventory.
+- Applied coupon.
+- Discount eligibility.
+- Shipping charge.
+- Tax, if applicable.
+- Final payable amount.
+- Currency.
+
+Use integer minor units or a safe decimal/money representation to prevent floating-point monetary errors.
+
+### B. Transaction verification
+
+For every online payment:
+
+- Verify the transaction with the gateway server-to-server.
+- Validate merchant identity.
+- Validate the internal order reference.
+- Validate transaction ID.
+- Validate amount.
+- Validate currency.
+- Validate final payment status.
+- Validate that the transaction has not already been processed.
+
+### C. Webhook and callback security
+
+Implement provider-specific callback/webhook verification.
+
+Where supported:
+
+- Verify digital signatures.
+- Verify authentication tokens.
+- Validate encrypted payloads.
+- Verify provider transaction status independently.
+- Use idempotency protection.
+- Reject malformed requests.
+- Reject mismatched order references.
+- Reject mismatched amounts.
+- Handle replayed notifications.
+
+Do not assume that every gateway provides cryptographically signed webhooks. Follow the actual provider documentation and perform server-side transaction queries when required.
+
+### D. Idempotency
+
+A single payment notification must never create multiple successful transactions or multiple orders.
+
+Use:
+
+- Unique transaction references.
+- Unique gateway transaction identifiers where applicable.
+- Database-level unique constraints.
+- Atomic conditional updates.
+- Idempotency keys for payment initiation where supported.
+- Safe retry handling.
+
+If the same callback arrives five times, the payment must still be processed only once.
+
+### E. Payment failure and recovery
+
+Handle:
+
+- Customer cancellation.
+- Insufficient balance.
+- Invalid card.
+- Bank rejection.
+- Gateway timeout.
+- Network interruption.
+- Expired payment session.
+- Invalid callback.
+- Gateway server errors.
+- Duplicate callback.
+- Unknown payment state.
+
+Never convert an unknown state into success.
+
+If a transaction result is uncertain, keep it in a pending/processing state and reconcile with the gateway before making a final decision.
+
+# PHASE 9: DATABASE AND TRANSACTION RECORDS
+
+Inspect existing database models before changing schemas.
+
+Reuse existing models where possible.
+
+Implement or repair a complete payment transaction record containing appropriate fields such as:
+
+- Internal payment ID.
+- Order ID.
+- Customer ID.
+- Payment method.
+- Payment provider.
+- Gateway transaction ID.
+- Merchant transaction reference.
+- Amount.
+- Currency.
+- Payment status.
+- Gateway response reference.
+- Initiation timestamp.
+- Verification timestamp.
+- Payment completion timestamp.
+- Failure reason/code where safe.
+- Refund reference and refund status when applicable.
+- Created and updated timestamps.
+
+Do not store:
+
+- Raw card numbers.
+- CVV.
+- Passwords.
+- Access tokens in transaction records.
+- Unnecessary sensitive personal information.
+- Full unredacted gateway secrets or credentials.
+
+Preserve existing order history and transaction records.
+
+Create appropriate indexes and unique constraints.
+
+Use database transactions or equivalent atomic operations for payment and order updates where supported.
+
+If the project uses MongoDB/Mongoose, account for transaction support and the actual deployment topology. Do not assume standalone MongoDB supports multi-document transactions. Use an appropriate replica-set-capable deployment or another safe consistency strategy.
+
+Never reset, drop, or overwrite existing production collections.
+
+# PHASE 10: ADMIN PANEL — COMPLETE PAYMENT MANAGEMENT
+
+Integrate the payment system into the existing Admin Panel.
+
+Do not redesign the entire Admin Panel.
+
+The administrator should be able to manage and monitor:
+
+### Payment Dashboard
+
+Display:
+
+- Total payment volume.
+- Successful online payments.
+- Pending payments.
+- Failed payments.
+- Cancelled payments.
+- COD collection pending.
+- COD collected.
+- Refunds.
+- Payment method breakdown.
+- Recent transactions.
+
+Use real database data and actual verified transactions.
+
+Do not use fake analytics or hardcoded transaction values.
+
+### Transaction Management
+
+Admin should be able to:
+
+- View all payment transactions.
+- Search by transaction ID.
+- Search by order ID.
+- Filter by payment provider.
+- Filter by payment method.
+- Filter by payment status.
+- Filter by date range.
+- View payment details.
+- View verification timestamps.
+- View gateway reference information.
+- View safe failure reasons.
+- Open the associated order.
+
+### Payment Settings
+
+Where the existing architecture supports payment configuration, allow authorized administrators to manage:
+
+- Payment method availability.
+- Enable/disable individual methods.
+- Provider selection.
+- Sandbox/live mode configuration where applicable.
+- Public display labels.
+- Non-secret configuration.
+
+Security requirements:
+
+- Do not expose merchant secret keys through public APIs.
+- Do not return credentials to ordinary frontend code.
+- Keep production secrets in secure environment variables or an appropriate secrets manager.
+- Restrict credential management to properly authorized administrators.
+- Audit sensitive configuration changes.
+
+### Refund Management
+
+Implement refunds only when the selected gateway supports an official refund API and the merchant account is authorized to use it.
+
+Expected lifecycle:
+
+1. Authorized admin requests a refund.
+2. Backend validates the original transaction.
+3. Backend checks whether the amount is refundable.
+4. Backend initiates the official provider refund request.
+5. Backend verifies the refund result.
+6. Backend records the refund transaction.
+7. Backend updates payment and order records appropriately.
+
+Support partial refunds only if the gateway supports them.
+
+Never mark a refund successful merely because an admin clicked the refund button.
+
+Never issue a duplicate refund.
+
+If the gateway does not support automatic refunds, clearly display the actual limitation and implement a properly audited manual refund workflow without falsely claiming that money was returned.
+
+# PHASE 11: FRONTEND PAYMENT EXPERIENCE
+
+Preserve the existing checkout page design.
+
+Do not redesign the website.
+
+Make only the changes required to connect the existing UI to genuine backend payment processing.
+
+Expected frontend behavior:
+
+- Customer selects a payment method.
+- Frontend requests payment initiation from the backend.
+- Loading and processing states are displayed correctly.
+- Customer is redirected to the official payment provider when required.
+- Customer returns to the application.
+- Frontend requests the actual payment/order status from the backend.
+- The backend returns the verified result.
+- Frontend displays success only after server-side verification.
+- Pending payments display a pending message.
+- Failed payments display a clear failure message.
+- Cancelled payments display a cancellation message.
+- COD displays an order-placed / payment-to-be-collected message, not an online payment success message.
+
+Create or reuse dedicated result states/pages if the existing project architecture requires them.
+
+Prevent repeated payment submissions while an initiation request is being processed.
+
+Do not rely on localStorage, sessionStorage, React state, or URL query parameters as proof of payment.
+
+# PHASE 12: ENVIRONMENT VARIABLES AND PROVIDER CONFIGURATION
+
+Inspect the existing environment configuration.
+
+Add only the variables required by the selected official gateway integrations.
+
+Possible examples, subject to the actual provider documentation:
+
+MONGODB_URI=
+APP_BASE_URL=
+
+BKASH_BASE_URL=
+BKASH_APP_KEY=
+BKASH_APP_SECRET=
+BKASH_USERNAME=
+BKASH_PASSWORD=
+
+NAGAD_BASE_URL=
+NAGAD_MERCHANT_ID=
+NAGAD_MERCHANT_NUMBER=
+NAGAD_PRIVATE_KEY=
+NAGAD_PUBLIC_KEY=
+
+SSLCOMMERZ_STORE_ID=
+SSLCOMMERZ_STORE_PASSWORD=
+
+AAMARPAY_STORE_ID=
+AAMARPAY_SIGNATURE_KEY=
+
+SHURJOPAY_USERNAME=
+SHURJOPAY_PASSWORD=
+
+These are illustrative configuration names, not a requirement to integrate every provider.
+
+Use only the configuration required by the chosen gateway.
+
+Requirements:
+
+- Never hardcode credentials.
+- Never commit production secrets to Git.
+- Never expose secrets in frontend environment variables.
+- Validate required configuration during startup.
+- Clearly distinguish sandbox and live environments.
+- Prevent accidental production use of sandbox credentials.
+- Prevent accidental live transactions during development/testing.
+- Provide a safe configuration guide in the project's environment example file.
+- Never put actual credentials in example files.
+
+If merchant credentials are unavailable, prepare the integration safely but clearly report that live payment processing cannot be activated until the merchant credentials, onboarding, and gateway approval are completed.
+
+Do not invent credentials or pretend a provider account exists.
+
+# PHASE 13: OFFICIAL DOCUMENTATION REQUIREMENT
+
+Before implementing any provider-specific integration, inspect the current official merchant documentation for that provider.
+
+Use the exact API version, authentication method, request format, callback mechanism, signature verification, payment execution, transaction query, and refund API documented by the provider.
+
+Do not fabricate:
+
+- API endpoints.
+- Authentication headers.
+- Request payloads.
+- Signature algorithms.
+- Encryption formats.
+- Transaction verification responses.
+- Refund capabilities.
+
+If official documentation is unavailable or the merchant integration details are missing, do not create a fake production implementation.
+
+Build the provider adapter interface and report exactly what remains blocked.
+
+# PHASE 14: TESTING — REAL-WORLD VERIFICATION
+
+Testing is mandatory.
+
+Do not finish the task after the UI looks correct.
+
+### A. Unit Tests
+
+Test:
+
+- Amount calculation.
+- Payment state transitions.
+- Gateway response validation.
+- Order-payment association.
+- Idempotency.
+- Refund amount validation.
+- Authorization.
+- Invalid callback rejection.
+
+### B. Integration Tests
+
+Test:
+
+- Payment initiation API.
+- Gateway authentication.
+- Payment verification API.
+- Webhook/callback processing.
+- Database persistence.
+- Order status updates.
+- Duplicate notification handling.
+- Payment failure handling.
+- Payment cancellation handling.
+- COD collection confirmation.
+
+### C. Sandbox Tests
+
+Where official sandbox environments are available, test each configured online gateway using the provider's official test credentials and test payment methods.
+
+Test at least:
+
+1. Successful payment.
+2. Failed payment.
+3. Cancelled payment.
+4. Expired payment.
+5. Invalid transaction reference.
+6. Incorrect amount.
+7. Duplicate callback.
+8. Gateway timeout.
+9. Customer refresh during payment.
+10. Customer returns without completing payment.
+
+Never use real customer cards or unauthorized payment credentials for testing.
+
+Never perform real money transactions without explicit merchant authorization.
+
+### D. COD Tests
+
+Test:
+
+- COD order placement.
+- COD remains unpaid after checkout.
+- Admin order confirmation.
+- Delivery collection.
+- Collection failure.
+- Order cancellation.
+- Duplicate collection attempt.
+
+### E. Database Tests
+
+Verify:
+
+- Correct transaction creation.
+- Correct order association.
+- Correct payment status.
+- Correct amount and currency.
+- No duplicate transaction.
+- Correct persistence after server restart.
+- Correct Admin Panel transaction display.
+
+### F. Regression Tests
+
+Ensure all unrelated features continue working:
+
+- User registration/login.
+- Product listing.
+- Product details.
+- Cart.
+- Wishlist.
+- Checkout.
+- Coupons.
+- Shipping calculation.
+- Inventory.
+- Order history.
+- Admin authentication.
+- Admin order management.
+- Existing APIs.
+- Existing routes.
+- Existing responsive layouts.
+
+# PHASE 15: STRICT CHANGE CONTROL
+
+This is one of the most important requirements.
+
+You are working on an existing project, not creating a new one.
+
+Do not unnecessarily modify:
+
+- Homepage design.
+- Product details design.
+- Cart design.
+- Wishlist design.
+- Checkout layout.
+- Navigation bar.
+- Footer.
+- Existing URLs.
+- Existing routes.
+- Existing unrelated API endpoints.
+- Existing business logic.
+- Existing reusable components.
+- Existing CSS.
+- Existing authentication.
+- Existing admin modules.
+- Existing database schemas unrelated to payments.
+
+Do not rename existing components or functions without a demonstrated technical necessity.
+
+Do not remove existing features.
+
+Do not replace working functionality with mock data.
+
+Do not introduce duplicate payment systems.
+
+Do not create fake gateway integrations.
+
+Do not break existing API contracts.
+
+Do not make unrelated refactoring changes.
+
+Before changing a shared component, identify every place where it is used and verify that the change will not break other pages.
+
+If a payment-related modification requires a change to an existing shared module, make the smallest compatible change and test all affected areas.
+
+Maintain backward compatibility wherever possible.
+
+# PHASE 16: PRODUCTION READINESS AND OPERATIONAL SAFETY
+
+Implement:
+
+- Secure HTTPS-only production payment communication.
+- Server-side input validation.
+- Rate limiting on sensitive payment initiation and verification endpoints.
+- Authentication and authorization for protected operations.
+- Secure webhook/callback handling.
+- Structured payment logs with sensitive data redacted.
+- Monitoring for failed and pending transactions.
+- Gateway timeout handling.
+- Retry handling without duplicate charges.
+- Payment reconciliation for uncertain transactions.
+- Database indexes.
+- Safe error responses.
+- Graceful service failure handling.
+
+Never retry a payment charge blindly after a timeout.
+
+First query the gateway using the original transaction reference to determine whether the initial request succeeded.
+
+If the outcome cannot be established, preserve the pending/unknown state and require reconciliation.
+
+Do not expose internal gateway responses, credentials, stack traces, or sensitive customer information to the frontend.
+
+# PHASE 17: FINAL ACCEPTANCE CRITERIA
+
+The implementation is complete only when the following conditions are satisfied:
+
+1. bKash initiates a genuine payment through an authorized merchant integration.
+2. Nagad initiates a genuine payment through an authorized merchant integration.
+3. Debit/Credit Card initiates a genuine transaction through an authorized payment gateway.
+4. Backend independently verifies all online payment results.
+5. Frontend cannot fake a successful payment.
+6. Invalid or mismatched transactions are rejected.
+7. Successful transactions are persisted in the database.
+8. Failed transactions remain failed.
+9. Cancelled transactions remain cancelled.
+10. Duplicate callbacks cannot create duplicate successful payments.
+11. COD orders remain unpaid until actual collection.
+12. COD collection is recorded securely.
+13. Admin Panel displays real transaction information.
+14. Order and payment statuses remain consistent.
+15. Refunds are processed only through supported, verified workflows.
+16. Existing checkout and unrelated application features continue working.
+17. No production secrets are exposed.
+18. All available sandbox and automated tests pass.
+
+A payment provider must not be marked LIVE or production-ready unless genuine merchant credentials, required approvals, and successful live-environment configuration are verified.
+
+# PHASE 18: FINAL IMPLEMENTATION REPORT
+
+After completing the implementation, provide a detailed report.
+
+Include:
+
+1. Existing payment system problems discovered.
+2. Files and modules inspected.
+3. Files modified.
+4. Files created.
+5. Payment gateway integrations completed.
+6. Payment methods that remain blocked by missing merchant credentials.
+7. Backend APIs implemented or repaired.
+8. Database changes.
+9. Admin Panel changes.
+10. Security measures implemented.
+11. Sandbox test results.
+12. Automated test results.
+13. Regression test results.
+14. Environment variables that must be configured.
+15. Exact steps required to activate live payments.
+16. Remaining limitations or risks.
+
+Use these status labels:
+
+- PASS — Implemented and successfully verified.
+- FAIL — Implemented but test failed.
+- BLOCKED — Requires merchant credentials, approval, or external provider access.
+- NOT TESTED — Could not be verified.
+
+Never report a payment gateway as successfully integrated merely because its UI, API wrapper, or redirect page exists.
+
+Never claim that real money was charged unless a genuine authorized transaction was completed and verified.
+
+## FINAL NON-NEGOTIABLE INSTRUCTION
+
+First understand the complete existing project.
+
+Then implement only the payment-related changes necessary to achieve genuine, secure, server-verified, database-persisted payment processing.
+
+The goal is not to make the payment page look successful.
+
+The goal is to make the payment system behave like a real-world production e-commerce payment infrastructure.
+
+**No fake success. No frontend-only payment. No unverified transaction. No duplicate charge. No false order completion. No unnecessary modification to existing functionality.**

@@ -1,0 +1,969 @@
+# MASTER PROMPT: ENTERPRISE-GRADE DYNAMIC BANNER BUILDER, ADVERTISEMENT MANAGEMENT & HERO IMAGE SLIDER SYSTEM
+
+## ROLE & RESPONSIBILITY
+
+Act as a Senior Full-Stack Software Architect, Principal Backend Engineer, Senior Frontend Engineer, Database Architect, UI/UX Designer, and Production Systems Engineer.
+
+Your task is to analyze my existing e-commerce project and implement a complete, enterprise-grade, fully dynamic Banner Management System, Advertisement Management System, and Image-Only Hero Slider Management System.
+
+This is an enhancement to an existing production-oriented application, NOT a request to rebuild the project.
+
+You must work with the existing technology stack, architecture, design system, coding conventions, authentication, authorization, database, API patterns, and component structure.
+
+**Critical requirement: Do not break, replace, simplify, or unnecessarily refactor existing functionality.**
+
+---
+
+# PHASE 1: COMPLETE PROJECT AUDIT BEFORE IMPLEMENTATION
+
+Before writing or modifying any code:
+
+1. Analyze the entire project structure.
+2. Identify the frontend framework, backend framework, database, ORM, authentication system, API architecture, and file storage mechanism.
+3. Inspect the existing admin dashboard.
+4. Inspect the current banner implementation.
+5. Inspect the existing Hero Slider implementation.
+6. Inspect the existing advertisement functionality and any existing advertisement-related database models.
+7. Inspect product listing pages, product detail pages, homepage sections, category pages, and other relevant routes.
+8. Identify reusable components, existing upload utilities, API services, hooks, and database relationships.
+9. Identify existing naming conventions and UI design patterns.
+10. Identify potential compatibility issues before making changes.
+
+Create an implementation plan based on the actual project architecture.
+
+Do not assume that a particular framework, database, API endpoint, or folder structure exists. Discover everything from the source code.
+
+## NON-NEGOTIABLE PRESERVATION RULE
+
+Do not unnecessarily modify:
+
+- Existing business logic.
+- Product management.
+- Product variants.
+- Shopping cart.
+- Checkout.
+- Authentication and authorization.
+- User management.
+- Order management.
+- Existing APIs.
+- Existing database relationships.
+- Existing navigation.
+- Existing responsive layouts.
+- Existing components.
+- Existing URLs and routing.
+- Existing environment variables.
+- Existing design system.
+
+Only modify existing components when required for the requested functionality.
+
+Preserve backward compatibility wherever possible.
+
+---
+
+# PHASE 2: ENTERPRISE DYNAMIC BANNER BUILDER
+
+Build a fully dynamic, advanced Banner Builder inside the existing Admin Dashboard.
+
+The administrator must be able to create, edit, duplicate, preview, publish, unpublish, schedule, archive, and delete banners.
+
+## 2.1 Banner Creation System
+
+Provide a professional Create Banner interface.
+
+Each banner should support:
+
+- Internal banner name.
+- Public heading.
+- Subheading.
+- Description.
+- Optional badge or promotional label.
+- Multiple text elements.
+- Multiple CTA buttons.
+- Background customization.
+- Responsive sizing.
+- Custom positioning.
+- Layer management.
+- Visibility controls.
+- Destination URLs.
+- Display scheduling.
+- Priority and ordering.
+- Active/inactive status.
+
+## 2.2 Advanced Background Customization
+
+The banner background must support multiple background types.
+
+### A. Solid Color Background
+
+- Custom color picker.
+- HEX color input.
+- RGB/HSL support where appropriate.
+- Background opacity.
+- Color presets.
+
+### B. Image Background
+
+- Upload background images.
+- Image URL support if compatible with the existing architecture.
+- Desktop background image.
+- Tablet background image.
+- Mobile background image.
+- Background image positioning.
+- Background image sizing.
+- Background repeat.
+- Background attachment where appropriate.
+- Image overlay.
+- Overlay opacity.
+- Image focal point.
+- Image cropping controls.
+- Background alignment.
+
+### C. Advanced Gradient Background
+
+Support professional CSS gradients:
+
+- Linear gradients.
+- Radial gradients.
+- Conic gradients.
+- Multiple gradient color stops.
+- Custom gradient angles.
+- Gradient direction.
+- Gradient position.
+- Gradient opacity.
+- Multiple layered gradients.
+- Gradient presets.
+- Custom gradient configuration.
+
+### D. Combined Background System
+
+Allow administrators to combine:
+
+- Background image + gradient.
+- Background image + solid color overlay.
+- Multiple gradients.
+- Background color + image + gradient overlay.
+
+The administrator must be able to control the visual layering and opacity independently.
+
+Never restrict the banner to one background type.
+
+## 2.3 Advanced Banner Layout & Positioning
+
+Build a powerful positioning system.
+
+Administrators must be able to customize:
+
+- Banner width.
+- Banner height.
+- Minimum height.
+- Maximum height.
+- Aspect ratio.
+- Padding.
+- Margin.
+- Border radius.
+- Border width.
+- Border color.
+- Box shadow.
+- Overflow behavior.
+- Content alignment.
+- Horizontal positioning.
+- Vertical positioning.
+- Content container width.
+- Text alignment.
+
+Support different positioning modes:
+
+- Flexbox-based positioning.
+- Grid-based positioning.
+- Absolute positioning for individual layers.
+- Relative positioning.
+- Custom spacing and alignment.
+
+Where appropriate, provide drag-and-drop positioning and a visual preview editor.
+
+Positioning should use responsive values rather than relying exclusively on fixed pixel coordinates.
+
+## 2.4 Banner Content & Layer Editor
+
+Each banner should support independently configurable content layers.
+
+Examples:
+
+- Heading.
+- Subheading.
+- Description.
+- Promotional badge.
+- Price text.
+- Discount text.
+- Image element.
+- Decorative element.
+- CTA button.
+- Secondary button.
+- Custom text.
+
+Each layer must have independent settings:
+
+- Position X/Y.
+- Width and height.
+- Font family.
+- Font size.
+- Font weight.
+- Text color.
+- Line height.
+- Letter spacing.
+- Text alignment.
+- Opacity.
+- Rotation.
+- Z-index.
+- Padding.
+- Margin.
+- Visibility.
+- Responsive behavior.
+
+Provide layer ordering and visibility controls.
+
+If practical, implement drag-and-drop editing with a live canvas preview.
+
+## 2.5 Advanced CTA Button Builder
+
+Allow multiple buttons inside a banner.
+
+Each button must support:
+
+- Custom label.
+- Custom destination URL.
+- Internal page navigation.
+- External website navigation.
+- Product page navigation.
+- Category page navigation.
+- Custom route.
+- Background color.
+- Text color.
+- Gradient background.
+- Border.
+- Border radius.
+- Padding.
+- Font size.
+- Font weight.
+- Hover background.
+- Hover text color.
+- Hover animation.
+- Icon selection.
+- Icon positioning.
+- Button alignment.
+- Responsive visibility.
+
+Support button types such as:
+
+- Primary CTA.
+- Secondary CTA.
+- Outline CTA.
+- Ghost CTA.
+- Custom CTA.
+
+Validate destination URLs and prevent unsafe URL schemes.
+
+---
+
+# PHASE 3: ADVANCED RESPONSIVE BANNER MANAGEMENT
+
+The system must support separate configurations for:
+
+- Desktop.
+- Tablet.
+- Mobile.
+
+Administrators must be able to customize:
+
+- Banner height.
+- Banner width.
+- Image source.
+- Text positioning.
+- Font size.
+- Content visibility.
+- Button positioning.
+- Spacing.
+- Alignment.
+
+Create a device preview switcher inside the Banner Builder.
+
+The published banner must render correctly across mobile, tablet, laptop, and desktop screens.
+
+Avoid horizontal overflow, broken images, overlapping content, and layout shifts.
+
+---
+
+# PHASE 4: PROFESSIONAL ADVERTISEMENT MANAGEMENT SYSTEM
+
+Implement a complete Advertisement Management section inside the existing Admin Dashboard.
+
+Do not confuse advertisements with ordinary banners. They should be independently manageable entities with their own lifecycle, settings, and display rules.
+
+## 4.1 Advertisement Creation
+
+Administrators must be able to create advertisements with:
+
+- Internal advertisement name.
+- Advertisement title.
+- Subtitle.
+- Description.
+- Promotional label.
+- Main image.
+- Optional secondary image.
+- Background image.
+- Background color.
+- Gradient background.
+- Text color.
+- CTA button.
+- CTA label.
+- Destination URL.
+- Close button.
+- Display status.
+- Start date.
+- End date.
+- Display priority.
+- Display placement.
+- Device targeting.
+
+## 4.2 Advertisement Image Upload
+
+Implement a proper image-upload workflow.
+
+Requirements:
+
+- Upload from the administrator's device.
+- Image preview before saving.
+- Replace uploaded images.
+- Remove uploaded images.
+- Validate file type.
+- Validate file size.
+- Handle upload failures.
+- Display upload progress.
+- Store permanent image references.
+- Support the project's existing cloud storage or upload infrastructure.
+
+Do not store large raw image files directly inside database records unless the existing architecture specifically requires it.
+
+Never use temporary browser object URLs as permanent image URLs.
+
+## 4.3 Advertisement Placement
+
+Allow advertisements to be displayed in different locations:
+
+- Homepage.
+- Homepage hero area.
+- Between product sections.
+- Product listing pages.
+- Product detail pages.
+- Category pages.
+- Search results pages.
+- Sidebar.
+- Promotional sections.
+- Footer promotional areas.
+- Other supported custom placements.
+
+The administrator should be able to select one or multiple placements.
+
+Each placement must have a clearly defined rendering integration.
+
+Avoid rendering the same advertisement multiple times unintentionally.
+
+## 4.4 Advertisement Actions & Navigation
+
+Each advertisement must support:
+
+### Close Button
+
+- Enable or disable the close button.
+- Customize its position.
+- Customize its appearance.
+- Close the advertisement immediately.
+- Remember dismissal according to a configurable persistence policy.
+
+Possible dismissal policies:
+
+- Until page reload.
+- Current browser session.
+- For a specified duration.
+- Until the advertisement expires.
+
+Use appropriate browser storage based on the chosen policy.
+
+### CTA Button
+
+Examples:
+
+- Shop Now.
+- Explore Now.
+- View Collection.
+- Buy Now.
+- Learn More.
+- Discover More.
+
+Administrators must be able to configure:
+
+- CTA text.
+- CTA destination.
+- Button design.
+- Button placement.
+
+### Destination URL Support
+
+Support:
+
+- Internal application routes.
+- Product detail page URLs.
+- Category URLs.
+- Collection URLs.
+- External website URLs.
+- Facebook URLs.
+- Instagram URLs.
+- YouTube URLs.
+- Other valid external URLs.
+
+Support optional new-tab behavior for external destinations.
+
+Validate and sanitize URLs appropriately.
+
+## 4.5 Advertisement Display Rules
+
+Implement:
+
+- Start and end scheduling.
+- Active/inactive status.
+- Automatic expiration.
+- Display priority.
+- Device-specific visibility.
+- Placement-specific visibility.
+- Optional frequency limits.
+- Dismissal persistence.
+- Published status.
+
+Expired advertisements must not appear on the public website.
+
+Draft advertisements must never appear publicly.
+
+The frontend should retrieve advertisements from the backend using their actual published state and display eligibility.
+
+---
+
+# PHASE 5: HERO IMAGE SLIDER — IMAGE ONLY
+
+IMPORTANT: The existing Hero Slider must be treated as a separate system from the Dynamic Banner Builder.
+
+The Hero Slider must contain ONLY images.
+
+Do not introduce:
+
+- Heading text.
+- Subheading.
+- Description.
+- Promotional badges.
+- CTA buttons.
+- Text overlays.
+- Any other content layers.
+
+## 5.1 Hero Slider Admin Management
+
+Administrators must be able to:
+
+- Add a new slide.
+- Upload an image.
+- Preview the image.
+- Replace the image.
+- Remove the image.
+- Reorder slides.
+- Activate/deactivate slides.
+- Schedule visibility where supported.
+- Set desktop and mobile images where appropriate.
+
+## 5.2 Optional Image Link
+
+Each slide must have an OPTIONAL destination URL.
+
+If the administrator provides a valid URL:
+
+- The entire slide image should be clickable.
+- Clicking the image should navigate to the configured destination.
+- Internal routes should use the application's routing system.
+- External URLs should navigate safely.
+
+If no URL is provided:
+
+- The image should still display normally.
+- The image must not navigate anywhere.
+- It must not produce an empty link or broken click behavior.
+
+The entire slide should behave as a single clickable image when a valid destination exists.
+
+## 5.3 Slider Functionality
+
+Preserve and improve existing slider functionality where appropriate:
+
+- Automatic sliding.
+- Manual navigation.
+- Previous/next controls.
+- Pagination indicators.
+- Smooth transitions.
+- Responsive image handling.
+- Lazy loading where appropriate.
+- Accessibility.
+- Reduced-motion support.
+
+Do not add text or CTA content to the Hero Slider.
+
+---
+
+# PHASE 6: DATABASE & BACKEND ARCHITECTURE
+
+This is one of the most important requirements.
+
+The requested systems must be fully database-driven.
+
+Do not implement a frontend-only solution.
+
+Inspect the existing database and use its current ORM and migration conventions.
+
+Design suitable data models for:
+
+1. Banner.
+2. BannerBackground.
+3. BannerLayer.
+4. BannerButton.
+5. BannerResponsiveConfiguration.
+6. Advertisement.
+7. AdvertisementPlacement.
+8. AdvertisementDisplayConfiguration.
+9. HeroSlide.
+
+You may combine or normalize these models based on the existing architecture.
+
+Avoid unnecessary database complexity.
+
+## Database requirements
+
+Implement:
+
+- Proper primary keys.
+- Foreign key relationships.
+- Appropriate indexes.
+- Unique constraints where necessary.
+- Required field validation.
+- Nullable optional fields.
+- JSON configuration validation where appropriate.
+- Timestamps.
+- Created-by and updated-by tracking where appropriate.
+- Active/published status.
+- Soft deletion or archiving where appropriate.
+
+All configuration must persist after page reloads and server restarts.
+
+A saved banner must not disappear when the browser refreshes.
+
+A saved advertisement must remain available through the backend.
+
+Hero slides must load from the database.
+
+Do not use hardcoded frontend arrays as the source of truth.
+
+## Database migrations
+
+- Generate migrations using the project's existing migration system.
+- Never destroy existing data.
+- Never drop unrelated tables.
+- Never reset the database.
+- Never overwrite production data.
+- Preserve existing records.
+- Ensure migration compatibility.
+
+---
+
+# PHASE 7: BACKEND API IMPLEMENTATION
+
+Implement secure and properly validated APIs for all three systems.
+
+### Banner APIs
+
+- Create banner.
+- List banners.
+- Retrieve banner details.
+- Update banner.
+- Delete or archive banner.
+- Publish banner.
+- Unpublish banner.
+- Duplicate banner.
+- Update banner ordering.
+- Retrieve published banners.
+- Retrieve banners by placement.
+
+### Advertisement APIs
+
+- Create advertisement.
+- List advertisements.
+- Retrieve advertisement details.
+- Update advertisement.
+- Delete or archive advertisement.
+- Publish advertisement.
+- Unpublish advertisement.
+- Update advertisement priority.
+- Update advertisement placements.
+- Retrieve eligible public advertisements.
+- Track advertisement impressions where appropriate.
+- Track CTA clicks where appropriate.
+
+### Hero Slider APIs
+
+- Create slide.
+- List slides.
+- Retrieve slide.
+- Update slide.
+- Delete slide.
+- Update slide order.
+- Publish/unpublish slide.
+- Retrieve published slides.
+
+## API Security
+
+- Protect all administrative mutation endpoints.
+- Use the existing authentication system.
+- Enforce proper admin authorization.
+- Validate request payloads.
+- Validate IDs.
+- Sanitize user-generated content.
+- Validate URLs.
+- Apply appropriate rate limiting.
+- Avoid exposing internal error details.
+- Return consistent response structures.
+- Implement proper HTTP status codes.
+
+Public endpoints must expose only published and eligible content.
+
+Never expose draft banners or unpublished advertisements to unauthenticated users.
+
+---
+
+# PHASE 8: ADMIN DASHBOARD UI/UX
+
+Create a premium, professional, modern administration experience consistent with the existing dashboard.
+
+Add three clearly identifiable management sections:
+
+1. Banner Management.
+2. Advertisement Management.
+3. Hero Slider Management.
+
+## Dashboard Features
+
+- Overview statistics.
+- Total banners.
+- Active banners.
+- Draft banners.
+- Scheduled banners.
+- Active advertisements.
+- Expired advertisements.
+- Total hero slides.
+- Search.
+- Filtering.
+- Sorting.
+- Pagination.
+- Status indicators.
+- Bulk operations where appropriate.
+- Confirmation dialogs.
+- Loading states.
+- Empty states.
+- Error states.
+- Success notifications.
+
+## Banner Builder Interface
+
+The builder should have a professional editing workspace.
+
+Suggested layout:
+
+- Left panel: layers and content elements.
+- Center panel: live banner canvas.
+- Right panel: selected element properties.
+- Top toolbar: save, preview, publish, device preview, undo/redo where practical.
+
+Include a live preview that reflects actual configuration changes.
+
+Do not build decorative controls that do nothing.
+
+Every visible control must have a working implementation or be clearly disabled.
+
+---
+
+# PHASE 9: FRONTEND INTEGRATION
+
+Integrate the systems into the existing public-facing website.
+
+### Dynamic Banners
+
+Render banners based on:
+
+- Placement.
+- Publication status.
+- Scheduling.
+- Device visibility.
+- Display priority.
+- Responsive configuration.
+
+### Advertisements
+
+Display advertisements only in their assigned placements and only when eligible.
+
+Ensure:
+
+- Close button works.
+- CTA button works.
+- Image works.
+- External links work.
+- Internal links work.
+- Dismissal persistence works.
+- Expiration works.
+- Responsive layout works.
+
+### Hero Slider
+
+Retrieve slides dynamically from the backend.
+
+Render only image content.
+
+When a valid URL exists, the image becomes clickable.
+
+When no URL exists, render a non-navigating image.
+
+Use the actual database records, not hardcoded sample content.
+
+---
+
+# PHASE 10: PERFORMANCE & PRODUCTION OPTIMIZATION
+
+Implement production-quality performance practices:
+
+- Image optimization.
+- Responsive image delivery.
+- Lazy loading.
+- Appropriate caching.
+- Efficient API queries.
+- Database indexes.
+- Pagination.
+- Avoid unnecessary re-renders.
+- Avoid N+1 database queries.
+- Avoid duplicate API requests.
+- Proper error boundaries.
+- Loading skeletons.
+- Graceful failure handling.
+- Avoid cumulative layout shifts.
+- Proper image dimensions.
+- Accessible controls.
+
+Do not cache administrative data in a way that causes stale editing or publishing results.
+
+Public cache invalidation must work after an administrator changes published content.
+
+---
+
+# PHASE 11: SECURITY & RELIABILITY
+
+Implement appropriate security controls:
+
+- Admin-only write access.
+- Strict request validation.
+- Safe URL handling.
+- File upload validation.
+- File size restrictions.
+- MIME-type verification.
+- Safe image handling.
+- XSS protection.
+- CSRF protection where required by the existing architecture.
+- Safe database queries.
+- Secure error handling.
+- Authorization checks on every protected operation.
+
+Never trust frontend-only permission checks.
+
+The backend must independently verify authorization.
+
+---
+
+# PHASE 12: TESTING & VERIFICATION
+
+After implementation, perform a complete functional audit.
+
+### Banner Tests
+
+- Create banner.
+- Save banner.
+- Reload page.
+- Verify persisted data.
+- Edit banner.
+- Change background color.
+- Change gradient.
+- Upload background image.
+- Combine image and gradient.
+- Change layer position.
+- Change button style.
+- Change responsive settings.
+- Preview banner.
+- Publish banner.
+- Verify public rendering.
+- Unpublish banner.
+- Verify public removal.
+- Test scheduling.
+- Test deletion and archival.
+
+### Advertisement Tests
+
+- Create advertisement.
+- Upload image.
+- Save advertisement.
+- Verify database persistence.
+- Assign placements.
+- Publish advertisement.
+- Verify correct placement.
+- Click CTA.
+- Verify navigation.
+- Close advertisement.
+- Verify dismissal persistence.
+- Test external links.
+- Test internal links.
+- Test expiration.
+- Test mobile visibility.
+
+### Hero Slider Tests
+
+- Upload image.
+- Save slide.
+- Verify database persistence.
+- Publish slide.
+- Verify public rendering.
+- Click image with URL.
+- Verify navigation.
+- Test slide without URL.
+- Verify it remains a normal non-clickable image.
+- Reorder slides.
+- Verify ordering.
+- Test responsive behavior.
+
+### Regression Tests
+
+Verify that:
+
+- Product listing still works.
+- Product detail pages still work.
+- Shopping cart still works.
+- Checkout still works.
+- Authentication still works.
+- Admin authentication still works.
+- Existing APIs still work.
+- Existing navigation still works.
+- Existing page layouts remain intact.
+- Existing database records remain intact.
+
+Run the existing test suite, type checks, linting, and production build where available.
+
+Do not claim that a test passed unless it was actually executed and passed.
+
+---
+
+# PHASE 13: STRICT IMPLEMENTATION RULES
+
+These rules are mandatory.
+
+1. Do not rebuild the entire application.
+2. Do not replace the current database.
+3. Do not introduce an unrelated technology stack.
+4. Do not remove existing functionality.
+5. Do not redesign unrelated pages.
+6. Do not change existing URLs unnecessarily.
+7. Do not modify unrelated business logic.
+8. Do not create fake frontend-only CRUD operations.
+9. Do not use localStorage as a substitute for database persistence.
+10. Do not use hardcoded mock data in production.
+11. Do not leave buttons non-functional.
+12. Do not leave API endpoints disconnected.
+13. Do not silently swallow errors.
+14. Do not use temporary image URLs for permanent storage.
+15. Do not expose unpublished content.
+16. Do not perform destructive database operations.
+17. Do not add unnecessary dependencies.
+18. Do not overwrite existing environment configuration.
+19. Do not introduce breaking changes.
+20. Do not sacrifice existing functionality for new features.
+
+If a requirement conflicts with the existing architecture, investigate the conflict and implement the safest compatible solution.
+
+If a critical architectural issue prevents implementation, explain the issue rather than silently implementing an unreliable workaround.
+
+---
+
+# PHASE 14: FINAL DELIVERY REPORT
+
+After implementation, provide a detailed report.
+
+Include:
+
+1. Initial project architecture discovered.
+2. Files created.
+3. Files modified.
+4. Database models created or modified.
+5. Migrations generated and their execution status.
+6. APIs implemented.
+7. Admin dashboard sections implemented.
+8. Frontend integrations completed.
+9. Image storage implementation.
+10. Security measures implemented.
+11. Tests executed and their actual results.
+12. Production build result.
+13. Any remaining limitations.
+14. Any required environment variables.
+15. Any manual setup or deployment steps.
+
+Clearly distinguish between:
+
+- Fully implemented.
+- Implemented but not tested.
+- Requires external configuration.
+- Not implemented.
+
+Do not claim production readiness if important functionality remains incomplete.
+
+---
+
+# FINAL OBJECTIVE
+
+The final result must be a complete, enterprise-grade, database-driven content management system integrated into my existing e-commerce application.
+
+The three systems must remain logically independent:
+
+A. Dynamic Banner Builder — full design customization, positioning, backgrounds, layers, buttons, responsive layouts, and scheduling.
+
+B. Advertisement Management — image uploads, text, CTA buttons, close controls, placements, targeting, external/internal links, and scheduling.
+
+C. Hero Image Slider — image-only slides with optional clickable URLs, with absolutely no text or button overlays.
+
+All three must work correctly across:
+
+- Admin Dashboard.
+- Backend.
+- Database.
+- Public Frontend.
+- Image Storage.
+- API Layer.
+
+**Priority order:**
+
+1. Preserve existing functionality.
+2. Correct backend and database implementation.
+3. Complete admin functionality.
+4. Correct public frontend integration.
+5. Responsive premium UI/UX.
+6. Security and performance.
+7. Complete testing and regression verification.
+
+Start with the project audit, then implement the solution incrementally.
+
+Do not stop after producing a plan or a visual mockup. Implement the actual working functionality in the existing project.
+
+The result must be maintainable, scalable, secure, responsive, and suitable for a real production e-commerce application.

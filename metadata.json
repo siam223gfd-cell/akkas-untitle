@@ -1,0 +1,6 @@
+{
+  "name": "Novara Commerce",
+  "description": "Premium multi-category e-commerce platform with live catalog, Redux Toolkit cart, server-side checkout, verified reviews, and full operational admin suite.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
